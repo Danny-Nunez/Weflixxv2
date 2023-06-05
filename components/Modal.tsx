@@ -25,7 +25,7 @@ import { db } from '../firebase';
 import useAuth from '../hooks/useAuth';
 import { Element, Genre, Movie } from '../typings';
 import axios from 'axios';
-import WebTorrent from 'webtorrent';
+// import WebTorrent from 'webtorrent';
 
 // Function to convert TMDB ID to IMDb ID
 async function convertTmdbToImdb(tmdbId) {
