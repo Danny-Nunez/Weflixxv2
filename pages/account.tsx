@@ -26,7 +26,7 @@ function Account({ products }: Props) {
       <header className={`bg-[#000]`}>
         <Link href="/">
           <img
-            src="https://rb.gy/ulxxee"
+            src="/weflixxlogo.svg"
             width={120}
             height={120}
             className="cursor-pointer object-contain"
