@@ -31,7 +31,7 @@ function Plans({ products }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header className="border-b border-white/10 bg-[#141414]">
+      <header className="border-b border-white/10 bg-[#000]">
         <Link href="/">
           <img
             src="https://rb.gy/ulxxee"
