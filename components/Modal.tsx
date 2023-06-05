@@ -28,7 +28,7 @@ import axios from 'axios';
 // import WebTorrent from 'webtorrent';
 
 // Function to convert TMDB ID to IMDb ID
-async function convertTmdbToImdb(tmdbId) {
+async function convertTmdbToImdb(tmdbId: any) {
   try {
     const response = await axios.get(`https://api.themoviedb.org/3/movie/${tmdbId}/external_ids`, {
       params: {
@@ -39,13 +39,13 @@ async function convertTmdbToImdb(tmdbId) {
     const imdbId = response.data.imdb_id;
     return imdbId || null; // Return null if IMDb ID is not available
   } catch (error) {
-    console.error('Error converting TMDB ID to IMDb ID:', error.message);
+    console.error('Error converting TMDB ID to IMDb ID:', (error as Error).message);
     return null;
   }
 }
 
 
-async function getTorrentsByImdbId(imdbId) {
+async function getTorrentsByImdbId(imdbId: string) {
   try {
     const response = await axios.get(`https://yts.mx/api/v2/list_movies.json?query_term=${imdbId}`);
     const movies = response.data?.data?.movies || [];
@@ -54,16 +54,18 @@ async function getTorrentsByImdbId(imdbId) {
       const torrentLinks = movies[0].torrents || [];
 
       // Sort torrents by seeds in descending order
-      torrentLinks.sort((a, b) => b.seeds - a.seeds);
+      torrentLinks.sort((a: { seeds: number }, b: { seeds: number }) => b.seeds - a.seeds);
 
       // Filter and return the top two quality torrents
       const topTwoTorrents = torrentLinks.slice(0, 2);
 
       return topTwoTorrents;
     }
-  } catch (error) {
-    console.error('Error fetching torrents:', error.message);
+  } catch (error: unknown) {
+    console.error('Error fetching torrents:', (error as Error).message);
   }
+  
+  
 
   return [];
 }
@@ -94,8 +96,8 @@ function Modal() {
           console.log('Torrents:', torrents);
           setTorrents(torrents);
         }
-      } catch (error) {
-        console.error('Error:', error.message);
+      } catch (error: unknown) {
+        console.error('Error:', (error as Error).message);
       }
     };
 
@@ -231,21 +233,20 @@ function Modal() {
 
               {/* Display the torrent buttons */}
         {torrents.length > 0 && (
-          <div className="mt-0">
-            {torrents.map((torrent, index) => (
-              
-              <a
-                key={index}
-                href={torrent.url}
-                
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-               <button className=" inline-flex items-center gap-x-1 mr-2 rounded bg-white px-3 py-2 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"> {torrent.quality}<FaPlay className="h-4 w-4 text-black" /></button>
-              </a>
-            ))}
-          </div>
-        )}
+  <div className="mt-0">
+    {torrents.map((torrent, index) => (
+      <a
+        key={index}
+        href={(torrent as { url: string }).url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <button className=" inline-flex items-center gap-x-1 mr-2 rounded bg-white px-3 py-2 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"> {(torrent as { quality: string }).quality}<FaPlay className="h-4 w-4 text-black" /></button>
+        
+      </a>
+    ))}
+  </div>
+)}
 
               <button className="modalButton" onClick={handleList}>
                 {addedToList ? (
