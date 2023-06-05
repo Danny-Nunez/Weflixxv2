@@ -9,13 +9,13 @@ import { getAuth } from 'firebase/auth'
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyAikEcbejgbqRvbYrFmYJxBOcgzas1zagw', 
-  authDomain: 'streamflixv2.firebaseapp.com',
-  databaseURL: 'https://streamflixv2-default-rtdb.firebaseio.com',
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY, 
+  authDomain: process.env.NEXT_PUBLIC_FIREBASEAUTHDOMAIN_API_KEY,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASEDATABASEURL_API_KEY,
   projectId: 'streamflixv2',
   storageBucket: 'streamflixv2.appspot.com',
-  messagingSenderId: '99620803960',
-  appId: '1:99620803960:web:f4a871ce14a9c713cf248d',
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASEMESSAGEID_API_KEY,
+  appId: process.env.NEXT_PUBLIC_FIREBASEAPP_API_KEY,
 }
 // Initialize Firebase
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp()
