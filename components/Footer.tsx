@@ -7,14 +7,10 @@ import { InformationCircleIcon } from '@heroicons/react/solid'
 import { useRecoilState } from 'recoil'
 import { modalState, movieState } from '../atoms/modalAtom'
 
-interface Props {
-  netflixOriginals: Movie[]
-}
 
-function Footer({ netflixOriginals }: Props) {
-  const [movie, setMovie] = useState<Movie | null>(null)
-  const [showModal, setShowModal] = useRecoilState(modalState)
-  const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
+
+function Footer() {
+  
 
 
   return (
