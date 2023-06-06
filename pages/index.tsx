@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useRecoilValue } from 'recoil'
 import { modalState, movieState } from '../atoms/modalAtom'
 import Banner from '../components/Banner'
+import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Modal from '../components/Modal'
 import Plans from '../components/Plans'
@@ -72,6 +73,7 @@ const Home = ({
           <Row title="Romance Movies" movies={romanceMovies} />
           <Row title="Documentaries" movies={documentaries} />
         </section>
+        <Footer />
       </main>
       {showModal && <Modal />}
     </div>
