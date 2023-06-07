@@ -36,7 +36,7 @@ const MyList = ({ netflixOriginals, products }: Props) => {
         <title>My List - WeFlixx</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      
       <Header />
       <main className="backgroundMaster relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
         <Banner netflixOriginals={netflixOriginals} />

@@ -40,6 +40,7 @@ function Account({ products }: Props) {
             className="cursor-pointer rounded"
           />
         </Link>
+       
       </header>
 
       <main className="mx-auto max-w-6xl px-5 pt-24 pb-12 transition-all md:px-10">

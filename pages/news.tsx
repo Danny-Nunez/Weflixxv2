@@ -44,12 +44,12 @@ const News = () => {
     <div>
       
       <Header />
-      <div className="backgroundMaster  grid-col m-auto relative pl-4 pb-24 lg:space-y-24 lg:pl-16 lg:pr-16 lg:w-4/5 md:w-4/5">
+      <div className="backgroundMaster mt-20 grid-col m-auto relative pl-4 pr-4 pb-24 lg:space-y-24 lg:pl-16 lg:pr-16 lg:w-4/5 md:w-4/5">
       {/* <NewsBanner /> */}
       
       {movies.map((movie) => (
         <div key={movie.title}>
-          <img src={movie.image} alt={movie.title} />
+          <img className="rounded" src={movie.image} alt={movie.title} />
           <h2 className="font-extrabold text-2xl pt-4">{movie.title}</h2>
           <p className="text-slate-200 text-sm">{movie.description}</p>
         </div>
