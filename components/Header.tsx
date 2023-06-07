@@ -37,11 +37,21 @@ function Header() {
         <BasicMenu />
 
         <ul className="hidden space-x-4 md:flex">
+        <Link href="/">
           <li className="headerLink">Home</li>
-          <li className="headerLink">TV Shows</li>
+          </Link>
+          <Link href="/account">
+          <li className="headerLink">My Account</li>
+          </Link>
+          <Link href="/">
           <li className="headerLink">Movies</li>
-          <li className="headerLink">New & Popular</li>
+        </Link>
+        <Link href="/news">
+          <li className="headerLink">News</li>
+          </Link>
+          <Link href="/mylist">
           <li className="headerLink">My List</li>
+          </Link>
         </ul>
       </div>
 

@@ -12,8 +12,8 @@ const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY, 
   authDomain: process.env.NEXT_PUBLIC_FIREBASEAUTHDOMAIN_API_KEY,
   databaseURL: process.env.NEXT_PUBLIC_FIREBASEDATABASEURL_API_KEY,
-  projectId: 'streamflixv2',
-  storageBucket: 'streamflixv2.appspot.com',
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECTID_API_KEY,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGEBUCKET_API_KEY,
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASEMESSAGEID_API_KEY,
   appId: process.env.NEXT_PUBLIC_FIREBASEAPP_API_KEY,
 }

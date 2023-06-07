@@ -24,6 +24,7 @@ function Account({ products }: Props) {
       </Head>
 
       <header className={`bg-[#000]`}>
+        
         <Link href="/">
           <img
             src="/weflixxlogo.svg"
