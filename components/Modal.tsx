@@ -57,22 +57,23 @@ async function getTorrentsByImdbId(imdbId: string) {
       torrentLinks.sort((a: { seeds: number }, b: { seeds: number }) => b.seeds - a.seeds);
 
       // Filter and return the top two quality torrents
-      const topTwoTorrents = torrentLinks.slice(0, 2);
+      const topTwoTorrents = torrentLinks.slice(0, 2).map((torrent: { hash: string; quality: string }) => {
+        return { hash: torrent.hash, quality: torrent.quality };
+      });
 
       return topTwoTorrents;
     }
   } catch (error: unknown) {
     console.error('Error fetching torrents:', (error as Error).message);
   }
-  
-  
 
   return [];
 }
 
 
+
 function Modal() {
-  const [torrents, setTorrents] = useState<Movie[]>([]); // Change the type of torrents state to Movie[]
+  const [torrents, setTorrents] = useState<Array<{ hash: string; quality: string }>>([]);
   const [showModal, setShowModal] = useRecoilState(modalState);
   const [movie, setMovie] = useRecoilState(movieState);
   const [trailer, setTrailer] = useState('');
@@ -101,6 +102,9 @@ function Modal() {
         console.error('Error:', (error as Error).message);
       }
     };
+
+
+
 
     // Call the function to convert the TMDB ID to IMDb ID
     convertTmdbIdToImdbId();
@@ -232,17 +236,19 @@ function Modal() {
               </button> */}
 
               {/* Display the torrent buttons */}
-        {torrents.length > 0 && (
+              {torrents.length > 0 && (
   <div className="mt-0">
     {torrents.map((torrent, index) => (
       <a
         key={index}
-        href={(torrent as { hash: string }).hash}
+        href={torrent.hash}
         target="_blank"
         rel="noopener noreferrer"
       >
-        <button className=" inline-flex items-center gap-x-1 mr-2 rounded bg-white px-3 py-2 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"> {(torrent as { quality: string }).quality}<FaPlay className="h-4 w-4 text-black" /></button>
-        
+        <button className="inline-flex items-center gap-x-1 mr-2 rounded bg-white px-3 py-2 text-xl font-bold text-black transition hover:bg-[#e6e6e6]">
+          {torrent.quality}
+          <FaPlay className="h-4 w-4 text-black" />
+        </button>
       </a>
     ))}
   </div>
