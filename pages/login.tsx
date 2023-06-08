@@ -98,6 +98,8 @@ function Login() {
           >
             Sign up now
           </button>
+          
+          <p className="pt-5 text-sm">User:Demo@gmail.com Password:12345678</p>
         </div>
       </form>
       </div>

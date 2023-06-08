@@ -25,7 +25,7 @@ import { db } from '../firebase';
 import useAuth from '../hooks/useAuth';
 import { Element, Genre, Movie } from '../typings';
 import axios from 'axios';
-// import WebTorrent from 'webtorrent';
+import WebtorPlayer from "./WebtorPlayer";
 
 // Function to convert TMDB ID to IMDb ID
 async function convertTmdbToImdb(tmdbId: any) {
@@ -72,6 +72,7 @@ async function getTorrentsByImdbId(imdbId: string) {
 
 
 function Modal() {
+  const [torrents, setTorrents] = useState<Movie[]>([]); // Change the type of torrents state to Movie[]
   const [showModal, setShowModal] = useRecoilState(modalState);
   const [movie, setMovie] = useRecoilState(movieState);
   const [trailer, setTrailer] = useState('');
@@ -80,7 +81,7 @@ function Modal() {
   const { user } = useAuth();
   const [addedToList, setAddedToList] = useState(false);
   const [movies, setMovies] = useState<DocumentData[] | Movie[]>([]);
-  const [torrents, setTorrents] = useState([]);
+
   const axios = require('axios');
 
   useEffect(() => {
@@ -221,8 +222,7 @@ function Modal() {
             playing
             muted={muted}
           />
-
-
+ 
 
           <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
             <div className="flex space-x-2">
@@ -237,7 +237,7 @@ function Modal() {
     {torrents.map((torrent, index) => (
       <a
         key={index}
-        href={(torrent as { url: string }).url}
+        href={(torrent as { hash: string }).hash}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -283,7 +283,7 @@ function Modal() {
                 {movie?.release_date || movie?.first_air_date}
               </p>
               <div className="flex h-4 items-center justify-center rounded border border-white/40 px-1.5 text-xs">
-                HD
+                HD 
               </div>
             </div>
 
@@ -297,6 +297,10 @@ function Modal() {
                   <span className="text-[gray]">Genres: </span>
                   {genres.map((genre) => genre.name).join(', ')}
                 </div>
+
+
+                
+
 
                 <div>
                   <span className="text-[gray]">Original language: </span>
