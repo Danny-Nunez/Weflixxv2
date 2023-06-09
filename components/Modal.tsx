@@ -7,6 +7,7 @@ import {
 } from '@heroicons/react/outline';
 import { VolumeUpIcon } from '@heroicons/react/solid';
 import MuiModal from '@mui/material/Modal';
+
 import {
   collection,
   deleteDoc,
@@ -25,7 +26,13 @@ import { db } from '../firebase';
 import useAuth from '../hooks/useAuth';
 import { Element, Genre, Movie } from '../typings';
 import axios from 'axios';
-import WebtorPlayer from "./WebtorPlayer";
+import WebtorPlayer from './WebtorPlayer';
+
+
+
+interface Props {
+  movie: Movie | DocumentData
+}
 
 // Function to convert TMDB ID to IMDb ID
 async function convertTmdbToImdb(tmdbId: any) {
@@ -82,6 +89,9 @@ function Modal() {
   const { user } = useAuth();
   const [addedToList, setAddedToList] = useState(false);
   const [movies, setMovies] = useState<DocumentData[] | Movie[]>([]);
+  const [selectedTorrent, setSelectedTorrent] = useState<string | null>(null);
+ 
+
 
   const axios = require('axios');
 
@@ -102,8 +112,6 @@ function Modal() {
         console.error('Error:', (error as Error).message);
       }
     };
-
-
 
 
     // Call the function to convert the TMDB ID to IMDb ID
@@ -202,6 +210,16 @@ function Modal() {
 
   console.log(trailer)
 
+  const handleTorrentClick = (hash: string) => {
+    setSelectedTorrent(hash);
+    setShowModal(false);
+  };
+  
+  
+  
+
+  
+
   return (
     <MuiModal
       open={showModal}
@@ -237,22 +255,22 @@ function Modal() {
 
               {/* Display the torrent buttons */}
               {torrents.length > 0 && (
-  <div className="mt-0">
-    {torrents.map((torrent, index) => (
-      <a
-        key={index}
-        href={torrent.hash}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <button className="inline-flex items-center gap-x-1 mr-2 rounded bg-white px-3 py-2 text-xl font-bold text-black transition hover:bg-[#e6e6e6]">
-          {torrent.quality}
-          <FaPlay className="h-4 w-4 text-black" />
-        </button>
-      </a>
-    ))}
-  </div>
-)}
+            <div className="mt-0">
+              {torrents.map((torrent, index) => (
+                <button
+                key={index}
+                className="inline-flex items-center gap-x-1 mr-2 rounded bg-white px-3 py-2 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"
+                onClick={() => setSelectedTorrent(torrent.hash)}
+              >
+                {torrent.quality}
+                <FaPlay className="h-4 w-4 text-black" />
+              </button>
+              
+              ))}
+            </div>
+          )}
+
+
 
               <button className="modalButton" onClick={handleList}>
                 {addedToList ? (
@@ -277,7 +295,46 @@ function Modal() {
           </div>
         </div>
 
-        
+        {showModal && selectedTorrent && (
+  <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
+    <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70"></div>
+    <div className="relative bg-[#151515] rounded-lg shadow-lg px-0 py-12 w-4/5">
+      <button
+        className="absolute top-2 right-2 text-white hover:text-gray-300 focus:text-gray-300"
+        onClick={() => {
+          setSelectedTorrent(null);
+          setShowModal(false);
+        }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-8 w-8 bg-[#2d2d2d] rounded-2xl p-1"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+
+      <div className="text-center text-white">
+        <WebtorPlayer
+          torrentHash={selectedTorrent}
+          title={movie?.title}
+          backdrop={movie?.backdrop_path}
+          
+        />
+        <div className="text-sm pt-5">Please be patient while the movie loads.</div>
+      </div>
+    </div>
+  </div>
+)}
+
 
         <div className="flex space-x-16 rounded-b-md bg-[#181818] px-10 py-8">
           <div className="space-y-6 text-lg">
@@ -287,6 +344,7 @@ function Modal() {
               </p>
               <p className="font-light">
                 {movie?.release_date || movie?.first_air_date}
+                
               </p>
               <div className="flex h-4 items-center justify-center rounded border border-white/40 px-1.5 text-xs">
                 HD 
@@ -305,7 +363,7 @@ function Modal() {
                 </div>
 
 
-                
+ 
 
 
                 <div>
