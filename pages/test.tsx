@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import HeaderSearch from '../components/HeaderSearch';
 import { modalState, movieState } from '../atoms/modalAtom'
 import { useRecoilState } from 'recoil'
-
+import Modal from '../components/Modal';
 
 interface Movie {
   title: string;
   poster_path: string;
   backdrop_path: string;
   description: string;
+  id: number;
 }
 
 const Test = () => {
@@ -36,6 +36,16 @@ const Test = () => {
     await searchMovies();
     setQuery(''); // Clear the query after each search
   };
+
+  const handleModalOpen = (movie: Movie) => {
+    setCurrentMovie(movie);
+    setShowModal(true);
+  };
+
+  const openModal = (movie: Movie) => {
+    setCurrentMovie(movie);
+    setShowModal(true);
+  }
   
 
   return (
@@ -96,38 +106,29 @@ const Test = () => {
           </button>
         </form>
   
-        <div
-  className="grid grid-cols-3 gap-4 pt-4 sm:grid-cols-4"
-  onClick={(event) => {
-    const { currentTarget } = event;
-    const movie = movies[currentTarget.dataset.index];
-    setCurrentMovie(movie);
-    setShowModal(true);
-  }}
->
-  {movies
-    .filter((movie) => movie.poster_path)
-    .map((movie, index) => (
-      <div
-        key={movie.title}
-        data-index={index}
-      >
-        <img
-          className="rounded h-5/6 w-5/6 m-auto"
-          src={`https://www.themoviedb.org/t/p/original${movie.poster_path}`}
-          alt={movie.title}
-        />
-        <h2 className="font-extrabold text-xs pt-2 pb-4 text-center sm:text-lg">
-          {movie.title}
-        </h2>
-      </div>
-    ))}
-</div>
-      </div>
+        <div className="grid grid-cols-3 gap-4 pt-4 sm:grid-cols-4">
+            {movies
+              .filter((movie) => movie.poster_path)
+              .map((movie) => (
+                <div key={movie.id}>
+                  <img
+                    className="rounded h-5/6 w-5/6 m-auto cursor-pointer"
+                    src={`https://www.themoviedb.org/t/p/original${movie.poster_path}`}
+                    alt={movie.title}
+                    onClick={() => handleModalOpen(movie)}
+                  />
+                  <h2 className="font-extrabold text-xs pt-2 pb-4 text-center sm:text-lg">
+                    {movie.title}
+                  </h2>
+                </div>
+              ))}
+          </div>
+        </div>
       </main>
-      </div>
-    );
-  };
+      {showModal && <Modal />} {/* Render the modal when showModal is true */}
+    </div>
+  );
+};
   
   export default Test;
   
