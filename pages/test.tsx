@@ -41,7 +41,7 @@ const Test = () => {
     <main className="backgroundMaster relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
     
     <div className="pt-24 w-4/5 m-auto">
-      <form className="flex items-center" onSubmit={handleSearch}>
+      <form className="flex w-3/5 m-auto items-center pb-5 " onSubmit={handleSearch}>
         <label htmlFor="simple-search" className="sr-only">
           Search
         </label>
@@ -99,7 +99,7 @@ const Test = () => {
     .map((movie) => (
       <div key={movie.title}>
         <img
-          className="rounded h-5/6"
+          className="rounded h-5/6 w-5/6"
           src={`https://www.themoviedb.org/t/p/original${movie.poster_path}`}
           alt={movie.title}
         />
