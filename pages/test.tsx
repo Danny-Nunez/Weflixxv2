@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { parseString } from 'xml2js';
 import HeaderSearch from '../components/HeaderSearch';
+import { modalState, movieState } from '../atoms/modalAtom'
+import { useRecoilState } from 'recoil'
 
 
 interface Movie {
@@ -14,11 +15,13 @@ interface Movie {
 const Test = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [query, setQuery] = useState('');
+  const [showModal, setShowModal] = useRecoilState(modalState)
+  const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
 
   const searchMovies = async () => {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=80d38ce4b783b1c72330ca00da8dd2d3&query=${query}`
+        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${query}`
       );
       const data = await response.json();
       setMovies(data.results);
@@ -93,20 +96,32 @@ const Test = () => {
           </button>
         </form>
   
-        <div className="grid grid-cols-3 gap-4 pt-4 sm:grid-cols-4">
+        <div
+  className="grid grid-cols-3 gap-4 pt-4 sm:grid-cols-4"
+  onClick={(event) => {
+    const { currentTarget } = event;
+    const movie = movies[currentTarget.dataset.index];
+    setCurrentMovie(movie);
+    setShowModal(true);
+  }}
+>
   {movies
-    .filter((movie) => movie.poster_path) // Exclude movies without a poster_path
-    .map((movie) => (
-      <div key={movie.title}>
+    .filter((movie) => movie.poster_path)
+    .map((movie, index) => (
+      <div
+        key={movie.title}
+        data-index={index}
+      >
         <img
           className="rounded h-5/6 w-5/6 m-auto"
           src={`https://www.themoviedb.org/t/p/original${movie.poster_path}`}
           alt={movie.title}
         />
-        <h2 className="font-extrabold text-xs pt-2 pb-4 text-center sm:text-lg">{movie.title}</h2>
+        <h2 className="font-extrabold text-xs pt-2 pb-4 text-center sm:text-lg">
+          {movie.title}
+        </h2>
       </div>
     ))}
-    
 </div>
       </div>
       </main>
