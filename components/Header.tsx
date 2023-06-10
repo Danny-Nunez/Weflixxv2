@@ -58,7 +58,7 @@ function Header() {
       <div className="flex items-center space-x-4 text-sm font-light">
       <Link href="/test"><SearchIcon className="hidden h-6 w-6 sm:inline cursor-pointer" /></Link>
         <p className="hidden lg:inline"><Link href="/kids">Kids</Link></p>
-        <BellIcon className="h-6 w-6" />
+        {/* <BellIcon className="h-6 w-6" /> */}
         <Link href="/account">
           <img
             src="https://rb.gy/g1pwyx"

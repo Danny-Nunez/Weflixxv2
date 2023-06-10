@@ -3,6 +3,7 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { useState } from 'react'
 import Link from 'next/link'
+import { SearchIcon } from '@heroicons/react/solid'
 
 export default function BasicMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -43,6 +44,7 @@ export default function BasicMenu() {
         <MenuItem onClick={handleClose}><Link href="/">Movies</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link href="/news">News</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link href="/mylist">My List</Link></MenuItem>
+        <MenuItem onClick={handleClose}><Link href="/test">Search</Link></MenuItem>
       </Menu>
     </div>
   )
