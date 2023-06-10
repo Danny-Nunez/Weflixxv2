@@ -99,7 +99,7 @@ const Test = () => {
     .map((movie) => (
       <div key={movie.title}>
         <img
-          className="rounded h-5/6 w-5/6"
+          className="rounded h-5/6 w-auto"
           src={`https://www.themoviedb.org/t/p/original${movie.poster_path}`}
           alt={movie.title}
         />
