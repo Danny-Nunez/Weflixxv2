@@ -33,6 +33,7 @@ const WebtorPlayer: React.FC<WebtorPlayerProps> = ({ torrentHash, title, backdro
       features: {
         embed: false, 
         settings: false,
+        p2pProgress: false,
       },
     });
   }, [torrentHash, title, backdrop]);

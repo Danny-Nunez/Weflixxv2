@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import useAuth from '../hooks/useAuth'
 import BasicMenu from './BasicMenu'
 
-function Header() {
+function HeaderSearch() {
   const [isScrolled, setIsScrolled] = useState(false)
   const { logout } = useAuth()
 
@@ -56,7 +56,7 @@ function Header() {
       </div>
 
       <div className="flex items-center space-x-4 text-sm font-light">
-      <Link href="/test"><SearchIcon className="hidden h-6 w-6 sm:inline cursor-pointer" /></Link>
+        {/* <SearchIcon className="hidden h-6 w-6 sm:inline" /> */}
         <p className="hidden lg:inline"><Link href="/kids">Kids</Link></p>
         <BellIcon className="h-6 w-6" />
         <Link href="/account">
@@ -71,4 +71,4 @@ function Header() {
   )
 }
 
-export default Header
+export default HeaderSearch

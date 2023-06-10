@@ -64,7 +64,7 @@ async function getTorrentsByImdbId(imdbId: string) {
       torrentLinks.sort((a: { seeds: number }, b: { seeds: number }) => b.seeds - a.seeds);
 
       // Filter and return the top two quality torrents
-      const topTwoTorrents = torrentLinks.slice(0, 2).map((torrent: { hash: string; quality: string }) => {
+      const topTwoTorrents = torrentLinks.slice(0, 1).map((torrent: { hash: string; quality: string }) => {
         return { hash: torrent.hash, quality: torrent.quality };
       });
 
@@ -262,7 +262,7 @@ function Modal() {
                 className="inline-flex items-center gap-x-1 mr-2 rounded bg-white px-3 py-2 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"
                 onClick={() => setSelectedTorrent(torrent.hash)}
               >
-                {torrent.quality}
+                Watch Now 
                 <FaPlay className="h-4 w-4 text-black" />
               </button>
               
