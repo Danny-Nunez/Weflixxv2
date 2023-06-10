@@ -99,11 +99,11 @@ const Test = () => {
     .map((movie) => (
       <div key={movie.title}>
         <img
-          className="rounded h-5/6 w-5/6"
+          className="rounded h-5/6 w-5/6 m-auto"
           src={`https://www.themoviedb.org/t/p/original${movie.poster_path}`}
           alt={movie.title}
         />
-        <h2 className="font-extrabold text-sm pt-2 pb-4 text-center sm:text-lg">{movie.title}</h2>
+        <h2 className="font-extrabold text-xs pt-2 pb-4 text-center sm:text-lg">{movie.title}</h2>
       </div>
     ))}
     
