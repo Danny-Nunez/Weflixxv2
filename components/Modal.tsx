@@ -205,14 +205,17 @@ function Modal() {
   }
 
   const handleClose = () => {
-    setShowModal(false)
-  }
+    setSelectedTorrent(null);
+    setShowModal(false);
+    document.body.style.overflow = 'auto'; // Enable scrolling on the background
+  };
 
   console.log(trailer)
 
   const handleTorrentClick = (hash: string) => {
     setSelectedTorrent(hash);
     setShowModal(false);
+    document.body.style.overflow = 'hidden'; // Disable scrolling on the background
   };
   
   

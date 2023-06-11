@@ -45,6 +45,7 @@ const SearchMovies = () => {
   const openModal = (movie: Movie) => {
     setCurrentMovie(movie);
     setShowModal(true);
+    
   }
   
 
