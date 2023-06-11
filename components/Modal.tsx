@@ -236,14 +236,25 @@ function Modal() {
         </button>
 
         <div className="relative pt-[56.25%]">
-          <ReactPlayer
-            url={`https://www.youtube.com/watch?v=${trailer}`}
-            width="100%"
-            height="100%"
-            style={{ position: 'absolute', top: '0', left: '0' }}
-            playing
-            muted={muted}
-          />
+        {trailer ? (
+    <ReactPlayer
+      url={`https://www.youtube.com/watch?v=${trailer}`}
+      width="100%"
+      height="100%"
+      style={{ position: 'absolute', top: '0', left: '0' }}
+      playing
+      muted={muted}
+    />
+  ) : (
+    <ReactPlayer
+      url="https://youtu.be/xeT-USb9vKY"
+      width="100%"
+      height="100%"
+      style={{ position: 'absolute', top: '0', left: '0' }}
+      playing
+      muted={muted}
+    />
+  )}
  
 
           <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
@@ -298,7 +309,7 @@ function Modal() {
         {showModal && selectedTorrent && (
   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
     <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70"></div>
-    <div className="relative bg-[#151515] rounded-lg shadow-lg px-0 py-12 w-4/5">
+    <div className="relative bg-[#151515] rounded-lg shadow-lg px-0 py-12 w-full sm:w-11/12">
       <button
         className="absolute top-2 right-2 text-white hover:text-gray-300 focus:text-gray-300"
         onClick={() => {

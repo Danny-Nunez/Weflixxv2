@@ -12,7 +12,7 @@ interface Movie {
   id: number;
 }
 
-const Test = () => {
+const SearchMovies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [query, setQuery] = useState('');
   const [showModal, setShowModal] = useRecoilState(modalState)
@@ -106,7 +106,7 @@ const Test = () => {
           </button>
         </form>
   
-        <div className="grid grid-cols-3 gap-4 pt-4 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 pt-4 sm:grid-cols-4">
             {movies
               .filter((movie) => movie.poster_path)
               .map((movie) => (
@@ -130,7 +130,7 @@ const Test = () => {
   );
 };
   
-  export default Test;
+  export default SearchMovies;
   
   
   
