@@ -15,7 +15,7 @@ function Table({ products, selectedPlan }: Props) {
           {products.map((product) => (
             <td
               key={product.id}
-              className={`tableDataFeature ${
+              className={`tableDataFeature m-auto ${
                 selectedPlan?.id === product.id
                   ? 'text-[#e50914]'
                   : 'text-[gray]'
@@ -31,7 +31,7 @@ function Table({ products, selectedPlan }: Props) {
           {products.map((product) => (
             <td
               key={product.id}
-              className={`tableDataFeature ${
+              className={`tableDataFeature m-auto ${
                 selectedPlan?.id === product.id
                   ? 'text-[#e50914]'
                   : 'text-[gray]'
@@ -46,7 +46,7 @@ function Table({ products, selectedPlan }: Props) {
           <td className="tableDataTitle">Resolution</td>
           {products.map((product) => (
             <td
-              className={`tableDataFeature ${
+              className={`tableDataFeature m-auto ${
                 selectedPlan?.id === product.id
                   ? 'text-[#E50914]'
                   : 'text-[gray]'
@@ -64,7 +64,7 @@ function Table({ products, selectedPlan }: Props) {
           </td>
           {products.map((product) => (
             <td
-              className={`tableDataFeature ${
+              className={`tableDataFeature m-auto ${
                 selectedPlan?.id === product.id
                   ? 'text-[#E50914]'
                   : 'text-[gray]'

@@ -27,15 +27,15 @@ function Plans({ products }: Props) {
   return (
     <div>
       <Head>
-        <title>Netflix</title>
+        <title>WeFlixx</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <header className="border-b border-white/10 bg-[#000]">
         <Link href="/">
           <img
-            src="https://rb.gy/ulxxee"
-            alt="Netflix"
+            src="/weflixxlogo.svg"
+            alt="WeFlixx"
             width={150}
             height={90}
             className="cursor-pointer object-contain"
@@ -68,8 +68,8 @@ function Plans({ products }: Props) {
           </li>
         </ul>
 
-        <div className="mt-4 flex flex-col space-y-4">
-          <div className="flex w-full items-center justify-center self-end md:w-3/5">
+        <div className="mt-4 flex flex-col space-y-4 ">
+          <div className="flex w-full items-center justify-center gap-8 self-end md:w-3/5">
             {products.map((product) => (
               <div
                 key={product.id}

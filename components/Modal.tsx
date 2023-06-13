@@ -207,7 +207,7 @@ function Modal() {
   const handleClose = () => {
     setSelectedTorrent(null);
     setShowModal(false);
-    document.body.style.overflow = 'auto'; // Enable scrolling on the background
+    
   };
 
   console.log(trailer)
@@ -215,7 +215,7 @@ function Modal() {
   const handleTorrentClick = (hash: string) => {
     setSelectedTorrent(hash);
     setShowModal(false);
-    document.body.style.overflow = 'hidden'; // Disable scrolling on the background
+   
   };
   
   
@@ -312,7 +312,7 @@ function Modal() {
         {showModal && selectedTorrent && (
   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
     <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70"></div>
-    <div className="relative bg-[#151515] rounded-lg shadow-lg px-0 py-12 w-full sm:w-11/12">
+    <div className="relative bg-[#151515] rounded-lg shadow-lg px-0 py-12 w-full sm:w-4/5">
       <button
         className="absolute top-2 right-2 text-white hover:text-gray-300 focus:text-gray-300"
         onClick={() => {
