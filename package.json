@@ -8,8 +8,11 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^1.0.6",
+    "@iconify/icons-heroicons-solid": "^1.2.6",
     "@mui/material": "^5.6.1",
+    "@react-icons/all-files": "^4.1.0",
     "@stripe/firestore-stripe-payments": "^0.0.6",
     "axios": "^1.4.0",
     "firebase": "^9.6.10",

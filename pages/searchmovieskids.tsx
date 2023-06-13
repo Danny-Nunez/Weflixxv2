@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { modalState, movieState } from '../atoms/modalAtom'
 import { useRecoilState } from 'recoil'
 import Modal from '../components/Modal';
-import Header from '../components/Header'
+import Headerkids from '../components/Headerkids'
 
 
 interface Movie {
@@ -55,7 +55,7 @@ const SearchMovies = () => {
 
   return (
     <div>
-    <Header />
+    <Headerkids />
     <main className="backgroundMaster relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
     
     <div className="pt-24 mt-5 w-4/5 m-auto">

@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil'
 import { modalState, movieState } from '../atoms/modalAtom'
 import Banner from '../components/Banner'
 import Footer from '../components/Footer'
-import Header from '../components/Header'
+import Headerkids from '../components/Headerkids'
 import Modal from '../components/Modal'
 import Plans from '../components/Plans'
 import Row from '../components/Row'
@@ -59,7 +59,7 @@ const Kids = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Headerkids />
       <main className="backgroundMaster relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
         <Banner netflixOriginals={netflixOriginals} />
         <section className="md:space-y-24">
