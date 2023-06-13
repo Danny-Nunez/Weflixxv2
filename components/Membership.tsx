@@ -26,7 +26,7 @@ function Membership() {
           onClick={manageSubscription}
         >
           {isBillingLoading ? (
-            <Loader color="dark:fill-[#e50914]" />
+           <div>Loading...</div>
           ) : (
             'Cancel Membership'
           )}
@@ -40,8 +40,8 @@ function Membership() {
             <p className="text-[gray]">Password: *********</p>
           </div>
           <div className="md:text-right">
-            <p className="membershipLink">Change email</p>
-            <p className="membershipLink">Change password</p>
+            <p className="">Change email</p>
+            <p className="">Change password</p>
           </div>
         </div>
 
@@ -55,10 +55,10 @@ function Membership() {
             </p>
           </div>
           <div className="md:text-right">
-            <p className="membershipLink">Manage payment info</p>
-            <p className="membershipLink">Add backup payment method</p>
-            <p className="membershipLink">Billing Details</p>
-            <p className="membershipLink">Change billing day</p>
+            <p className="membershipLink"><a onClick={manageSubscription}>Manage payment info</a></p>
+            <p className="membershipLink"><a onClick={manageSubscription}>Add backup payment method</a></p>
+            <p className="membershipLink"><a onClick={manageSubscription}>Billing Details</a></p>
+            <p className="membershipLink"><a onClick={manageSubscription}>Change billing day</a></p>
           </div>
         </div>
       </div>

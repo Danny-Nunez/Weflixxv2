@@ -7,6 +7,8 @@ import useAuth from '../hooks/useAuth'
 import useSubscription from '../hooks/useSubscription'
 import payments from '../lib/stripe'
 
+import { goToBillingPortal } from '../lib/stripe'
+
 interface Props {
   products: Product[]
 }
@@ -15,6 +17,12 @@ function AccountKids({ products }: Props) {
   console.log(products)
   const { user, logout } = useAuth()
   const subscription = useSubscription(user)
+
+  const manageSubscription = () => {
+    if (subscription) {
+      goToBillingPortal()
+    }
+  }
 
   return (
     <div>
@@ -66,7 +74,7 @@ function AccountKids({ products }: Props) {
             }
           </div>
           <p className="cursor-pointer text-blue-500 hover:underline md:text-right">
-            Change plan
+          <a onClick={manageSubscription}>Change plan</a>
           </p>
         </div>
 

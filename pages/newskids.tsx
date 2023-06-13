@@ -16,7 +16,7 @@ const NewsKids = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get('https://www.moviefone.com/feeds/news.rss');
+        const response = await axios.get('https://www.moviefone.com/feeds/disney-plus.rss');
         const xmlData = response.data;
         parseString(xmlData, (err, result) => {
           if (err) {
