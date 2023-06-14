@@ -80,7 +80,7 @@ function Header() {
       <div className="flex text-sm font-light">
       {/* <Link href="/searchmovies"><SearchIcon className="hidden h-6 w-6 sm:inline cursor-pointer" /></Link> */}
 
-      <div className="searchSize pr-0 sm:pr-8"><SearchForm query={query} setQuery={setQuery} onSubmit={handleSearch} /></div>
+      <div className=" hidden md:inline  "><SearchForm query={query} setQuery={setQuery} onSubmit={handleSearch} /></div>
 
 
       <Menu as="div" className="relative inline-block text-left">

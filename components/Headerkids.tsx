@@ -80,7 +80,7 @@ function Headerkids() {
       <div className="flex items-center space-x-4 text-sm font-light">
       {/* <Link href="/searchmovies"><SearchIcon className="hidden h-6 w-6 sm:inline cursor-pointer" /></Link> */}
 
-      <SearchForm query={query} setQuery={setQuery} onSubmit={handleSearch} />
+      <div className=" hidden md:inline  "><SearchForm  query={query} setQuery={setQuery} onSubmit={handleSearch} /></div>
 
 
       <Menu as="div" className="relative inline-block text-left">
