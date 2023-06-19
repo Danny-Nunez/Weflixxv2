@@ -20,6 +20,7 @@ export interface Movie {
   poster_path: string
   vote_average: number
   vote_count: number
+  description: string
 }
 
 export interface Element {

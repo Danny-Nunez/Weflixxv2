@@ -46,7 +46,7 @@ const MyList = ({ netflixOriginals, products }: Props) => {
         </section>
         <Footer />
       </main>
-      {showModal && <Modal />}
+      {showModal && <Modal openModal={() => {}} closeModal={() => {}} />}
     </div>
   )
 }

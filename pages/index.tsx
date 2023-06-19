@@ -2,12 +2,17 @@ import { getProducts, Product } from '@stripe/firestore-stripe-payments'
 import Head from 'next/head'
 import { useRecoilValue } from 'recoil'
 import { modalState, movieState } from '../atoms/modalAtom'
-import Banner from '../components/Banner'
+import BannerWeflixx from '../components/BannerWeflixx'
+// import Banner from '../components/Banner'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Modal from '../components/Modal'
 import Plans from '../components/Plans'
 import Row from '../components/Row'
+import TrendSlide from '../components/TrendSlide'
+import LatestSlide from '../components/LatestSlide'
+import LatestTvSlide from '../components/LatestTvSlide'
+import ComingSoonSlide from '../components/ComingSoonSlide'
 import useAuth from '../hooks/useAuth'
 import useList from '../hooks/useList'
 import useSubscription from '../hooks/useSubscription'
@@ -61,21 +66,26 @@ const Home = ({
 
       <Header />
       <main className="backgroundMaster relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
-        <Banner netflixOriginals={netflixOriginals} />
+        {/* <Banner netflixOriginals={netflixOriginals} /> */}
+        <BannerWeflixx />
         <section className="md:space-y-24">
-          <Row title="Trending Now" movies={trendingNow} />
+        <div className="pt-20 lg:pt-20"><TrendSlide title="Trending Now" /></div>
+          <div className="pt-40 lg:pt-20 md:pt-20"><LatestSlide title="Latest Movies" /></div>
+          <div className="pt-40 lg:pt-20 md:pt-20"><LatestTvSlide title="Latest TvShows" /></div>
+          <div className="pt-40 lg:pt-20 md:pt-20"><ComingSoonSlide title="Trending on IMDB" /></div>
+          {/* <Row title="Trending Now" movies={trendingNow} />
           <Row title="Top Rated" movies={topRated} />
-          <Row title="Action Thrillers" movies={actionMovies} />
+          <Row title="Action Thrillers" movies={actionMovies} /> */}
           {/* My List Component */}
-          {list.length > 0 && <Row title="My List" movies={list} />}
-          <Row title="Comedies" movies={comedyMovies} />
-          <Row title="Scary Movies" movies={horrorMovies} />
-          <Row title="Romance Movies" movies={romanceMovies} />
-          <Row title="Documentaries" movies={documentaries} />
+          {/* {list.length > 0 && <Row title="My List" movies={list} />} */}
+          {/* <Row title="Comedies" movies={comedyMovies} /> */}
+          {/* <Row title="Scary Movies" movies={horrorMovies} /> */}
+          {/* <Row title="Romance Movies" movies={romanceMovies} /> */}
+          {/* <Row title="Documentaries" movies={documentaries} /> */}
         </section>
         <Footer />
       </main>
-      {showModal && <Modal />}
+      {showModal && <Modal openModal={() => {}} closeModal={() => {}} />}
     </div>
   )
 }

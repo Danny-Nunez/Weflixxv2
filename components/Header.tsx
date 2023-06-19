@@ -83,7 +83,7 @@ function Header() {
       <div className=" hidden md:inline  "><SearchForm query={query} setQuery={setQuery} onSubmit={handleSearch} /></div>
 
 
-      <Menu as="div" className="relative inline-block text-left">
+      {/* <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-1 py-2 pb-1 pt-1 text-sm  ring-inset ring-gray-300 hover:text-gray-200">
        <span className="pt-1 pl-1 menuShadow">Adult</span>
@@ -147,7 +147,7 @@ function Header() {
           </div>
         </Menu.Items>
       </Transition>
-    </Menu>
+    </Menu> */}
         {/* <p className="hidden lg:inline"><Link href="/">Adult</Link></p> */}
         {/* <BellIcon className="h-6 w-6" /> */}
         {/* <Link href="/account">

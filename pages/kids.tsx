@@ -76,7 +76,7 @@ const Kids = ({
         </section>
         <Footer />
       </main>
-      {showModal && <Modal />}
+      {showModal && <Modal openModal={() => {}} closeModal={() => {}} />}
     </div>
   )
 }

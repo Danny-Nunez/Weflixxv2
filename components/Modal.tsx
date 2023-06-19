@@ -26,7 +26,7 @@ import { db } from '../firebase';
 import useAuth from '../hooks/useAuth';
 import { Element, Genre, Movie } from '../typings';
 import axios from 'axios';
-import WebtorPlayer from './WebtorPlayer';
+import VideoPlayer from './VideoPlayer';
 
 
 
@@ -34,53 +34,28 @@ interface Props {
   movie: Movie | DocumentData
 }
 
-// Function to convert TMDB ID to IMDb ID
-async function convertTmdbToImdb(tmdbId: any) {
-  try {
-    const response = await axios.get(`https://api.themoviedb.org/3/movie/${tmdbId}/external_ids`, {
-      params: {
-        api_key: process.env.NEXT_PUBLIC_API_KEY,
-      },
-    });
+interface MovieInfo {
+  data?: Data;
+}
 
-    const imdbId = response.data.imdb_id;
-    return imdbId || null; // Return null if IMDb ID is not available
-  } catch (error) {
-    console.error('Error converting TMDB ID to IMDb ID:', (error as Error).message);
-    return null;
-  }
+interface MovieInfoData {
+  description?: string;
+  quality?: string; // Assuming quality is a string
+}
+
+interface Data {
+  description?: string;
+  quality?: string;
+  releaseDate?: string;
+  genres?: string[];
+  duration?: string;
+  casts?: string[];
 }
 
 
-async function getTorrentsByImdbId(imdbId: string) {
-  try {
-    const response = await axios.get(`https://yts.mx/api/v2/list_movies.json?query_term=${imdbId}`);
-    const movies = response.data?.data?.movies || [];
-
-    if (movies.length > 0) {
-      const torrentLinks = movies[0].torrents || [];
-
-      // Sort torrents by seeds in descending order
-      torrentLinks.sort((a: { seeds: number }, b: { seeds: number }) => b.seeds - a.seeds);
-
-      // Filter and return the top two quality torrents
-      const topTwoTorrents = torrentLinks.slice(0, 1).map((torrent: { hash: string; quality: string }) => {
-        return { hash: torrent.hash, quality: torrent.quality };
-      });
-
-      return topTwoTorrents;
-    }
-  } catch (error: unknown) {
-    console.error('Error fetching torrents:', (error as Error).message);
-  }
-
-  return [];
-}
-
-
-
-function Modal() {
-  const [torrents, setTorrents] = useState<Array<{ hash: string; quality: string }>>([]);
+function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: () => void }) {
+  const [episodeId, setEpisodeId] = useState<string | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
   const [showModal, setShowModal] = useRecoilState(modalState);
   const [movie, setMovie] = useRecoilState(movieState);
   const [trailer, setTrailer] = useState('');
@@ -90,33 +65,55 @@ function Modal() {
   const [addedToList, setAddedToList] = useState(false);
   const [movies, setMovies] = useState<DocumentData[] | Movie[]>([]);
   const [selectedTorrent, setSelectedTorrent] = useState<string | null>(null);
- 
-
+  const [movieInfo, setMovieInfo] = useState<MovieInfo>({});
 
   const axios = require('axios');
 
-  useEffect(() => {
-    if (!movie) return;
+  // useEffect(() => {
+  //   if (!movie) return;
 
-    const convertTmdbIdToImdbId = async () => {
-      try {
-        const imdbId = await convertTmdbToImdb(movie?.id);
-        console.log('IMDb ID:', imdbId);
+  //   async function convertTmdbToImdb(tmdbId: string): Promise<string | null> {
+  //     try {
+  //       const imdbId = await convertTmdbToImdb(movie?.id);
+  //       console.log('IMDb ID:', imdbId);
 
-        if (imdbId) {
-          const torrents = await getTorrentsByImdbId(imdbId);
-          console.log('Torrents:', torrents);
-          setTorrents(torrents);
-        }
-      } catch (error: unknown) {
-        console.error('Error:', (error as Error).message);
-      }
-    };
+  //       if (imdbId) {
+  //         const torrents = await getTorrentsByImdbId(imdbId);
+  //         console.log('Torrents:', torrents);
+  //         setTorrents(torrents);
+  //       }
+  //     } catch (error: unknown) {
+  //       console.error('Error:', (error as Error).message);
+  //     }
+  //   };
 
 
     // Call the function to convert the TMDB ID to IMDb ID
-    convertTmdbIdToImdbId();
+  //   convertTmdbIdToImdbId();
+  // }, [movie]);
+
+  useEffect(() => {
+    async function fetchMovieInfo() {
+      try {
+        const movieInfoResponse = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}info?mediaId=${movie?.id}`);
+        // console.log("Movie info response: ", movieInfoResponse.data);
+        setMovieInfo(movieInfoResponse.data);
+  
+        if (movieInfoResponse.data?.data?.episodes && movieInfoResponse.data.data.episodes.length > 0) {
+          const firstEpisodeId = movieInfoResponse.data.data.episodes[0].id;
+          // console.log("First Episode ID:", firstEpisodeId);
+          setEpisodeId(firstEpisodeId); // Set the first episode's ID
+        }
+      } catch (error) {
+        console.error('Error fetching movie info:', error);
+      }
+    }
+  
+    fetchMovieInfo();
   }, [movie]);
+  
+  
+
 
   const toastStyle = {
     background: 'white',
@@ -129,32 +126,49 @@ function Modal() {
   }
 
   useEffect(() => {
-    if (!movie) return
-
-    async function fetchMovie() {
-      const data = await fetch(
-        `https://api.themoviedb.org/3/${
-          movie?.media_type === 'tv' ? 'tv' : 'movie'
-        }/${movie?.id}?api_key=${
-          process.env.NEXT_PUBLIC_API_KEY
-        }&language=en-US&append_to_response=videos`
+    if (!movie) return;
+  
+    async function fetchMovieIdAndDetails() {
+      // Search for the movie using its title
+      const searchData = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${encodeURIComponent(
+          movie?.title    
+        )}`
       )
         .then((response) => response.json())
-        .catch((err) => console.log(err.message))
-
-      if (data?.videos) {
-        const index = data.videos.results.findIndex(
-          (element: Element) => element.type === 'Trailer'
+        .catch((err) => console.log(err.message));
+  
+      // If the search results are not empty, use the first movie's id to fetch movie details
+      if (searchData.results.length > 0) {
+        const movieId = searchData.results[0].id;
+  
+        const data = await fetch(
+          `https://api.themoviedb.org/3/${
+            movie?.media_type === 'tv' ? 'tv' : 'movie'
+          }/${movieId}?api_key=${
+            process.env.NEXT_PUBLIC_API_KEY
+          }&language=en-US&append_to_response=videos`
         )
-        setTrailer(data.videos?.results[index]?.key)
-      }
-      if (data?.genres) {
-        setGenres(data.genres)
+          .then((response) => response.json())
+          .catch((err) => console.log(err.message));
+  
+        if (data?.videos) {
+          const index = data.videos.results.findIndex(
+            (element: Element) => element.type === 'Trailer'
+          );
+          setTrailer(data.videos?.results[index]?.key);
+        }
+  
+        if (data?.genres) {
+          setGenres(data.genres);
+        }
       }
     }
-
-    fetchMovie()
+  
+    fetchMovieIdAndDetails();
   }, [movie]);
+  
+
 
   // Find all the movies in the user's list
   useEffect(() => {
@@ -207,20 +221,19 @@ function Modal() {
   const handleClose = () => {
     setSelectedTorrent(null);
     setShowModal(false);
-    
   };
 
-  console.log(trailer)
+  // console.log(trailer)
 
-  const handleTorrentClick = (hash: string) => {
-    setSelectedTorrent(hash);
-    setShowModal(false);
-   
+  
+  const handlePlay = () => {
+    setShowPopup(true); // Show the popup
   };
   
-  
-  
 
+  const closePopup = () => {
+    setShowPopup(false); // Close the popup
+  };
   
 
   return (
@@ -262,28 +275,13 @@ function Modal() {
 
           <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
             <div className="flex space-x-2">
-              {/* <button className="flex items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]">
-                <FaPlay className="h-7 w-7 text-black" />
-                Play
-              </button> */}
-
-              {/* Display the torrent buttons */}
-              {torrents.length > 0 && (
-            <div className="mt-0">
-              {torrents.map((torrent, index) => (
-                <button
-                key={index}
-                className="inline-flex items-center gap-x-1 mr-2 rounded bg-white px-3 py-2 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"
-                onClick={() => setSelectedTorrent(torrent.hash)}
-              >
-                Watch Now 
-                <FaPlay className="h-4 w-4 text-black" />
-              </button>
-              
-              ))}
-            </div>
-          )}
-
+            <button
+            className="flex items-center gap-x-2 rounded bg-white px-3 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"
+            onClick={handlePlay}
+          >
+            Watch Now<FaPlay className="h-5 w-5 text-black" />
+            
+          </button>
 
 
               <button className="modalButton" onClick={handleList}>
@@ -309,16 +307,13 @@ function Modal() {
           </div>
         </div>
 
-        {showModal && selectedTorrent && (
+        {showPopup && (
   <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
     <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70"></div>
     <div className="relative bg-[#151515] rounded-lg shadow-lg px-0 py-12 w-full sm:w-4/5">
-      <button
+      <button onClick={closePopup}
         className="absolute top-2 right-2 text-white hover:text-gray-300 focus:text-gray-300"
-        onClick={() => {
-          setSelectedTorrent(null);
-          setShowModal(false);
-        }}
+        
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -337,12 +332,12 @@ function Modal() {
       </button>
 
       <div className="text-center text-white">
-        <WebtorPlayer
-          torrentHash={selectedTorrent}
-          title={movie?.title}
-          backdrop={movie?.backdrop_path}
-          
-        />
+      <VideoPlayer
+        movieId={movie?.id} // Pass the movie ID
+        episodeId={episodeId || ''} // Pass the episode ID or use an empty string as a fallback
+        title={movie?.title}
+        
+      />
         <div className="text-sm pt-5">Please be patient while the movie loads.</div>
       </div>
     </div>
@@ -353,15 +348,16 @@ function Modal() {
         <div className="flex space-x-16 rounded-b-md bg-[#181818] px-10 py-8">
           <div className="space-y-6 text-lg">
             <div className="flex items-center space-x-2 text-sm">
-              <p className="font-semibold text-green-400">
-              {(movie!.vote_average * 10).toFixed(2)}% Match
-              </p>
-              <p className="font-light">
+              <p>Release Date: <span className="font-semibold text-green-400">
+              {/* {(movie!.vote_average * 10).toFixed(2)}% Match */}
+               {movieInfo?.data?.releaseDate}
+              </span></p>
+              <p className="font-light pr-6">
                 {movie?.release_date || movie?.first_air_date}
                 
               </p>
-              <div className="flex h-4 items-center justify-center rounded border border-white/40 px-1.5 text-xs">
-                HD 
+               Quality:<div className="flex h-4 items-center justify-center rounded border border-white/40 px-1.5 text-xs">
+              {movieInfo?.data?.quality}
               </div>
             </div>
 
@@ -369,25 +365,22 @@ function Modal() {
             
               <p className="w-5/6">
               <div className="font-bold uppercase">{movie?.title}</div>
-                {movie?.overview}</p>
+            <div className="text-sm">{movie?.overview} {movieInfo?.data?.description}</div></p>
               <div className="flex flex-col space-y-3 text-sm">
                 <div>
                   <span className="text-[gray]">Genres: </span>
-                  {genres.map((genre) => genre.name).join(', ')}
+                  {genres.map((genre) => genre.name).join(', ')} {movieInfo?.data?.genres?.join(', ')}
                 </div>
 
 
- 
-
-
                 <div>
-                  <span className="text-[gray]">Original language: </span>
-                  {movie?.original_language}
+                  <span className="text-[gray]">Duration: </span>
+                  {movieInfo?.data?.duration}
                 </div>
 
                 <div>
-                  <span className="text-[gray]">Total votes: </span>
-                  {movie?.vote_count}
+                  <span className="text-[gray]">Cast: </span>
+                  {movieInfo?.data?.casts?.join(', ')}
                 </div>
               </div>
             </div>

@@ -80,7 +80,7 @@ const SearchMovies = () => {
           </div>
         </div>
       </main>
-      {showModal && <Modal />} {/* Render the modal when showModal is true */}
+      {showModal && <Modal openModal={() => {}} closeModal={() => {}} />}
     </div>
   );
 };
