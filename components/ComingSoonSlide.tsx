@@ -39,6 +39,7 @@ function ComingSoonSlide({ title }: { title: string }) {
           setMovies(res.data.data.results);
         } else {
           console.error('Unexpected API response structure');
+  
         }
       } catch (error) {
         console.error('Error fetching movies:', error);
