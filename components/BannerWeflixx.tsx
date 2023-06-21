@@ -54,7 +54,7 @@ function BannerWeflixx() {
   const handleMoreInfoClick = async () => {
     setLoading(true); // set loading to true
     if(movie?.title) {
-      const response = await fetch(`http://35.160.63.44:3000/api/search/${movie.title}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}search/${movie.title}`);
       const data = await response.json();
 
       if(data.data && data.data.results && data.data.results.length > 0) {

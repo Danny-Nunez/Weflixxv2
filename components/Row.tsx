@@ -46,7 +46,7 @@ function Row({ title, movies }: Props) {
           className="flex items-center space-x-0.5 overflow-x-scroll scrollbar-hide md:space-x-2.5 md:p-2"
         >
           {movies.map((movie) => (
-            <Thumbnail key={movie.id} movie={movie} />
+           <Thumbnail movie={movie} id={movie.id} />
             
           ))}
         </div>

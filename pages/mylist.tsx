@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useRecoilValue } from 'recoil'
 import { modalState, movieState } from '../atoms/modalAtom'
-import Banner from '../components/Banner'
+import BannerWeflixx from '../components/BannerWeflixx'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Modal from '../components/Modal'
@@ -39,10 +39,10 @@ const MyList = ({ netflixOriginals, products }: Props) => {
       
       <Header />
       <main className="backgroundMaster relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
-        <Banner netflixOriginals={netflixOriginals} />
+        <BannerWeflixx />
         <section className="md:space-y-24">
           {/* My List Component */}
-          {list.length > 0 && <Row title="My List" movies={list} />}
+          {/* {list.length > 0 && <Row title="My List" movies={list} />} */}
         </section>
         <Footer />
       </main>

@@ -51,7 +51,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId }) 
           <HlsPlayer
             playerRef={playerRef}
             src={movieUrl}
-            autoPlay
+            autoPlay={false}
             controls={true}
             width="100%"
             height="auto"

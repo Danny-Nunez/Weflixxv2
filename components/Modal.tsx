@@ -69,28 +69,6 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
 
   const axios = require('axios');
 
-  // useEffect(() => {
-  //   if (!movie) return;
-
-  //   async function convertTmdbToImdb(tmdbId: string): Promise<string | null> {
-  //     try {
-  //       const imdbId = await convertTmdbToImdb(movie?.id);
-  //       console.log('IMDb ID:', imdbId);
-
-  //       if (imdbId) {
-  //         const torrents = await getTorrentsByImdbId(imdbId);
-  //         console.log('Torrents:', torrents);
-  //         setTorrents(torrents);
-  //       }
-  //     } catch (error: unknown) {
-  //       console.error('Error:', (error as Error).message);
-  //     }
-  //   };
-
-
-    // Call the function to convert the TMDB ID to IMDb ID
-  //   convertTmdbIdToImdbId();
-  // }, [movie]);
 
   useEffect(() => {
     async function fetchMovieInfo() {
@@ -175,49 +153,76 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
     if (user) {
       return onSnapshot(
         collection(db, 'customers', user.uid, 'myList'),
-        (snapshot) => setMovies(snapshot.docs)
-      )
+        (snapshot) => setMovies(snapshot.docs.map((doc) => doc.data()))
+      );
     }
-  }, [db, movie?.id])
+  }, [db, movie?.id]);
 
   // Check if the movie is already in the user's list
-  useEffect(
-    () =>
-      setAddedToList(
-        movies.findIndex((result) => result.data().id === movie?.id) !== -1
-      ),
-    [movies]
-  )
+  useEffect(() => {
+    setAddedToList(
+      movies.findIndex((result) => result.id === movie?.id) !== -1
+    );
+  }, [movies]);
 
   const handleList = async () => {
+    if (!movie?.id) {
+      console.error("Movie ID is empty");
+      return;
+    }
+  
+    const movieId = movie?.id.toString();
+    const lastIndex = movieId.lastIndexOf('/');
+    const movieIdSubstring = lastIndex !== -1 ? movieId.substring(lastIndex + 1) : '';
+  
     if (addedToList) {
       await deleteDoc(
-        doc(db, 'customers', user!.uid, 'myList', movie?.id.toString()!)
-      )
-
+        doc(db, 'customers', user!.uid, 'myList', movieIdSubstring)
+      );
+  
       toast(
         `${movie?.title || movie?.original_name} has been removed from My List`,
         {
           duration: 8000,
-          style: toastStyle,
+          style: {
+            background: 'white',
+            color: 'black',
+            fontWeight: 'bold',
+            fontSize: '16px',
+            padding: '15px',
+            borderRadius: '9999px',
+            maxWidth: '1000px',
+          },
         }
-      )
+      );
     } else {
       await setDoc(
-        doc(db, 'customers', user!.uid, 'myList', movie?.id.toString()!),
+        doc(db, 'customers', user!.uid, 'myList', movieIdSubstring),
         { ...movie }
-      )
-
+      );
+  
       toast(
         `${movie?.title || movie?.original_name} has been added to My List`,
         {
           duration: 8000,
-          style: toastStyle,
+          style: {
+            background: 'white',
+            color: 'black',
+            fontWeight: 'bold',
+            fontSize: '16px',
+            padding: '15px',
+            borderRadius: '9999px',
+            maxWidth: '1000px',
+          },
         }
-      )
+      );
     }
-  }
-
+  };
+  
+  
+  
+  
+  
   const handleClose = () => {
     setSelectedTorrent(null);
     setShowModal(false);
