@@ -16,7 +16,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId }) 
   const fetchMovieUrl = async (id: string, episodeId: string): Promise<string> => {
     try {
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}streaming?mediaId=${id}&episodeId=${episodeId}`;
-      // console.log('API URL:', apiUrl); // Log the API URL
       const response = await fetch(apiUrl);
       const data = await response.json();
       const sources = data.data.sources;
@@ -33,13 +32,17 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId }) 
     const fetchUrl = async () => {
       setIsLoading(true);
       const url = await fetchMovieUrl(movieId, episodeId);
-      // console.log('Movie URL:', url); // Log the movie URL
       setMovieUrl(url);
       setIsLoading(false);
     };
 
     fetchUrl();
   }, [movieId, episodeId, title]);
+
+  const isAppleDevice = 
+    ["iPad Simulator","iPhone Simulator","iPod Simulator","iPad","iPhone","iPod"].includes(navigator.platform) ||
+    // iPad on iOS 13 detection
+    (navigator.userAgent.includes("Mac") && "ontouchend" in document);
 
   return (
     <div className="w-full">
@@ -48,14 +51,25 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId }) 
         <CircularProgress /> // Render the preloader when loading
       ) : (
         movieUrl && (
-          <HlsPlayer
-            playerRef={playerRef}
-            src={movieUrl}
-            autoPlay={false}
-            controls={true}
-            width="100%"
-            height="auto"
-          />
+          isAppleDevice ? 
+          (
+            <video 
+              src={movieUrl}
+              controls
+              width="100%"
+              height="auto"
+            />
+          ) : 
+          (
+            <HlsPlayer
+              playerRef={playerRef}
+              src={movieUrl}
+              autoPlay={false}
+              controls={true}
+              width="100%"
+              height="auto"
+            />
+          )
         )
       )}
     </div>
@@ -63,4 +77,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId }) 
 };
 
 export default VideoPlayer;
+
+
 
