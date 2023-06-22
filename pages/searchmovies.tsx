@@ -102,7 +102,7 @@ const SearchMovies = () => {
                 .map((movie) => (
                   <div key={movie?.id}>
                     <img
-                      className="rounded h-3/4 w-auto m-auto cursor-pointer"
+                      className="rounded h-44 w-auto m-auto cursor-pointer md:h-48 lg:h-52"
                       src={movie?.image}
                       alt={movie?.title}
                       onClick={() => handleModalOpen(movie)}
