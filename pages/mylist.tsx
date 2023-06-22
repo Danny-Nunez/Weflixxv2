@@ -42,9 +42,9 @@ const MyList = ({ netflixOriginals, products }: Props) => {
         <BannerWeflixx />
         <section className="md:space-y-24">
           {/* My List Component */}
-          {/* {list.length > 0 && <Row title="My List" movies={list} />} */}
+          {list.length > 0 && <Row title="My List" movies={list} />}
         </section>
-        <Footer />
+       <Footer />
       </main>
       {showModal && <Modal openModal={() => {}} closeModal={() => {}} />}
     </div>

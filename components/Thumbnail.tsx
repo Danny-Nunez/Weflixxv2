@@ -3,38 +3,49 @@ import Image from 'next/image'
 import { useRecoilState } from 'recoil'
 import { modalState, movieState } from '../atoms/modalAtom'
 import { Movie } from '../typings'
+import { useEffect, useState } from 'react'
 
 interface Props {
   movie: Movie | DocumentData
-  image: string;
 }
 
-function Thumbnail({ movie, id }: Props) {
+function Thumbnail({ movie }: Props) {
   const [showModal, setShowModal] = useRecoilState(modalState)
   const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
+  const [imageUrl, setImageUrl] = useState<string | null>(null)
 
-  // Extract the image URL from the movie data
-  const imageUrl = movie.image;
+  useEffect(() => {
+    // Fetch movie data from API and update imageUrl
+    fetch(`https://api.weflixx.com/api/info?mediaId=${movie.id}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          setImageUrl(data.data.image)
+        }
+      })
+  }, [movie.id])
 
   return (
     <div
-      className="titleTwo relative h-28 min-w-[180px] cursor-pointer group-hover:stroke-white transition duration-200 ease-out md:h-36 md:min-w-[260px] md:hover:scale-105"
+      className=" relative mr-1 w-auto h-60 min-w-[160px] cursor-pointer group-hover:stroke-white transition duration-200 ease-out md:h-75  md:min-w-[180px] md:hover:scale-105"
       onClick={() => {
         setCurrentMovie(movie)
         setShowModal(true)
       }}
     >
-      <Image
-        src={movie.image}
-        className="rounded-sm object-cover md:rounded"
-        layout="fill"
-      />
-      <h1 className="titleOne">{movie?.title}</h1>
-      <p>Movie ID: {id}</p>
+      {imageUrl && (
+        <Image
+          src={imageUrl}
+          className="rounded-sm md:rounded"
+          layout="fill"
+        />
+      )}
+      <span className="absolute bottom-0 bg-black rounded-sm bg-opacity-60 text-sm text-white p-1 w-11/12 overflow-ellipsis overflow-hidden whitespace-nowrap">{movie.title}</span>
     </div>
   )
 }
 
 export default Thumbnail
+
 
 

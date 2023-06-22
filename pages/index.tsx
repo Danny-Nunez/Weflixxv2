@@ -83,8 +83,9 @@ const Home = ({
           {/* <Row title="Romance Movies" movies={romanceMovies} /> */}
           {/* <Row title="Documentaries" movies={documentaries} /> */}
         </section>
-        <Footer />
+       <div className="mt-20"><Footer /></div> 
       </main>
+      
       {showModal && <Modal openModal={() => {}} closeModal={() => {}} />}
     </div>
   )

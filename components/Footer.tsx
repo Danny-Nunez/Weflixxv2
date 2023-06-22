@@ -10,20 +10,9 @@ import { modalState, movieState } from '../atoms/modalAtom'
 
 
 function Footer() {
-  
-
-
   return (
-    <div className="flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[5vh] lg:justify-center lg:pb-12 ">
-      <div className="m-auto">
-      <ul className="hidden space-x-6 md:flex">
-          <li className="headerLink">DCMA</li> 
-          <li className="headerLink">FAQ</li>  
-        </ul>
-        </div>
-        <div className="m-auto">
-        <p className="text-sm">Copyright © WeFlixx 2023 </p>
-        </div>
+    <div className="mt-40 p-4 bg-black text-center text-white m-auto">
+      © {new Date().getFullYear()} WeFlixx.com
     </div>
   )
 }

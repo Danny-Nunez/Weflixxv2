@@ -10,7 +10,8 @@ export interface Movie {
   release_date?: string
   first_air_date: string
   genre_ids: number[]
-  id: number
+  image: string;
+  id: string
   name: string
   origin_country: string[]
   original_language: string

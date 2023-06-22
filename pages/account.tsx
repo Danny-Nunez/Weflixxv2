@@ -6,6 +6,7 @@ import Membership from '../components/Membership'
 import useAuth from '../hooks/useAuth'
 import useSubscription from '../hooks/useSubscription'
 import payments from '../lib/stripe'
+import Footer from '../components/Footer'
 
 import { goToBillingPortal } from '../lib/stripe'
 
@@ -88,8 +89,10 @@ function Account({ products }: Props) {
             Sign out of all devices
           </p>
         </div>
+        <Footer />
       </main>
     </div>
+    
   )
 }
 
