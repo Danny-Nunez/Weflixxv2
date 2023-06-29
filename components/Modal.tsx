@@ -495,7 +495,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
   <>
     {/* Dropdown menu for seasons */}
     <div className="flex items-center justify-between">
-    <div>
+    <div className="hidden sm:block md:block">
               
               {stillPath && (
                 <img
@@ -506,7 +506,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
               )}
             </div>
             <div>
-      <div className="text-sm w-4/5 pr-8">
+      <div className="text-sm w-4/5 pr-8 hidden sm:block">
       <p className="text-lg font-semibold">Season {selectedSeason}</p>
       {episodeOverview}</div> 
     </div>

@@ -28,6 +28,7 @@ function Login() {
   };
 
   const isAppleDevice = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
   return (
     <div>
@@ -109,7 +110,14 @@ function Login() {
         <div className="flex justify-center items-center">
           <div className="relative w-540 h-405">
             <video className="w-6/12 h-full object-cover pb-40 pt-5 pl-4 ml-20 md:w-8/12" autoPlay loop muted>
-              <source src={isAppleDevice ? '/video-devices-apple.mov' : '/video-devices.m4v'} type="video/mp4" />
+              <source
+                src={
+                  isAppleDevice && isSafari
+                    ? '/video-devices-apple.mov'
+                    : '/video-devices.m4v'
+                }
+                type="video/mp4"
+              />
             </video>
             <img
               className="absolute top-0 left-0 w-full h-full object-cover"
@@ -129,5 +137,5 @@ function Login() {
   );
 }
 
-//
 export default Login;
+
