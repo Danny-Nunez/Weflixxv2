@@ -22,6 +22,8 @@ export interface Movie {
   vote_average: number
   vote_count: number
   description: string
+  still_path?: string;
+  type: string;
 }
 
 export interface Element {
