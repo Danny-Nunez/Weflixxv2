@@ -24,6 +24,7 @@
     "hls.js": "^1.4.6",
     "next": "latest",
     "next-transpile-modules": "^9.0.0",
+    "nextjs-progressbar": "^0.0.16",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hls-player": "^2.0.0",

@@ -32,6 +32,7 @@ import VideoPlayer from './VideoPlayer';
 
 
 
+
 interface Props {
   movie: Movie | DocumentData
 }
