@@ -6,9 +6,10 @@ interface VideoPlayerProps {
   movieId: string;
   episodeId: string;
   title: string;
+  episodeTitle: string;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId }) => {
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, episodeTitle }) => {
   const [movieUrl, setMovieUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const playerRef = useRef(null);
@@ -16,8 +17,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId }) 
   const fetchMovieUrl = async (id: string, episodeId: string): Promise<string> => {
     try {
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}streaming?mediaId=${id}&episodeId=${episodeId}`;
+      console.log('API URL:', apiUrl); // Check the API URL
+  
       const response = await fetch(apiUrl);
+      console.log('Response:', response); // Check the response object
+  
       const data = await response.json();
+      console.log('Data:', data); // Check the response data
+  
       const sources = data.data.sources;
       const firstSource = sources[0];
       const quality1080Url = firstSource ? firstSource.url : null;
@@ -27,6 +34,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId }) 
       return '';
     }
   };
+  
 
   useEffect(() => {
     const fetchUrl = async () => {
@@ -37,7 +45,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId }) 
     };
 
     fetchUrl();
-  }, [movieId, episodeId, title]);
+  }, [movieId, episodeId]);
 
   const isAppleDevice = 
     ["iPad Simulator","iPhone Simulator","iPod Simulator","iPad","iPhone","iPod"].includes(navigator.platform) ||
@@ -46,7 +54,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId }) 
 
   return (
     <div className="w-full">
-      <div className="text-white font-bold text-lg mb-2">{title}</div>
+      <div className="text-white font-bold text-lg mb-2">{episodeTitle}</div>
       {isLoading ? (
         <CircularProgress /> // Render the preloader when loading
       ) : (
@@ -64,7 +72,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId }) 
             <HlsPlayer
               playerRef={playerRef}
               src={movieUrl}
-              autoPlay={false}
+              autoPlay={true}
               controls={true}
               width="100%"
               height="auto"
