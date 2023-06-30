@@ -89,7 +89,7 @@ function Account({ products }: Props) {
             Sign out of all devices
           </p>
         </div>
-        <Footer />
+        <div className="relative lg:absolute bottom-0 left-0 w-full flex items-end justify-center"><Footer /></div>
       </main>
     </div>
     

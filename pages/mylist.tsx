@@ -38,13 +38,13 @@ const MyList = ({ netflixOriginals, products }: Props) => {
       </Head>
       
       <Header />
-      <main className="backgroundMaster relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
+      <main className="backgroundMaster relative pl-4 lg:space-y-24 lg:pl-16">
         <BannerWeflixx />
         <section className="md:space-y-24">
           {/* My List Component */}
           {list.length > 0 && <Row title="My List" movies={list} />}
         </section>
-       <Footer />
+       <div className="fixed lg:absolute bottom-0 left-0 w-full flex items-end justify-center"><Footer /></div>
       </main>
       {showModal && <Modal openModal={() => {}} closeModal={() => {}} />}
     </div>

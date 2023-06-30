@@ -77,7 +77,7 @@ const Home = ({
           <Row title="Top Rated" movies={topRated} />
           <Row title="Action Thrillers" movies={actionMovies} /> */}
           {/* My List Component */}
-          {/* {list.length > 0 && <Row title="My List" movies={list} />} */}
+          <div className="pt-40 lg:pt-20 md:pt-20">{list.length > 0 && <Row title="My List" movies={list} />}</div>
           {/* <Row title="Comedies" movies={comedyMovies} /> */}
           {/* <Row title="Scary Movies" movies={horrorMovies} /> */}
           {/* <Row title="Romance Movies" movies={romanceMovies} /> */}
