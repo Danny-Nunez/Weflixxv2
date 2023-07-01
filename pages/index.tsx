@@ -11,6 +11,14 @@ import Plans from '../components/Plans'
 import Row from '../components/Row'
 import TrendSlide from '../components/TrendSlide'
 import LatestSlide from '../components/LatestSlide'
+import FantasySlide from '../components/FantasySlide'
+import RealitySlide from '../components/RealitySlide'
+import AnimationSlide from '../components/AnimationSlide'
+import ScienceFictionSlide from '../components/ScienceFictionSlide'
+import HorrorSlide from '../components/HorrorSlide'
+import ActionSlide from '../components/ActionSlide'
+import DocumentarySlide from '../components/DocumentarySlide'
+import ComedySlide from '../components/ComedySlide'
 import LatestTvSlide from '../components/LatestTvSlide'
 import ComingSoonSlide from '../components/ComingSoonSlide'
 import useAuth from '../hooks/useAuth'
@@ -72,6 +80,15 @@ const Home = ({
         <div className="pt-20 lg:pt-20"><TrendSlide title="Trending Now" /></div>
           <div className="pt-40 lg:pt-20 md:pt-20"><LatestSlide title="Latest Movies" /></div>
           <div className="pt-40 lg:pt-20 md:pt-20"><LatestTvSlide title="Latest TvShows" /></div>
+          <div className="pt-40 lg:pt-20 md:pt-20"><RealitySlide title="Exciting Reality Tv" /></div>
+          <div className="pt-40 lg:pt-20 md:pt-20"><FantasySlide title="Fantasies" /></div>
+         
+          <div className="pt-40 lg:pt-20 md:pt-20"><ComedySlide title="Comedies" /></div>
+          <div className="pt-40 lg:pt-20 md:pt-20"><DocumentarySlide title="Documentaries" /></div>
+          <div className="pt-40 lg:pt-20 md:pt-20"><HorrorSlide title="Horror" /></div>
+          <div className="pt-40 lg:pt-20 md:pt-20"><ScienceFictionSlide title="Science Fiction" /></div>
+          <div className="pt-40 lg:pt-20 md:pt-20"><ActionSlide title="Action" /></div>
+          <div className="pt-40 lg:pt-20 md:pt-20"><AnimationSlide title="Animation" /></div>
           <div className="pt-40 lg:pt-20 md:pt-20"><ComingSoonSlide title="Trending on IMDB" /></div>
           {/* <Row title="Trending Now" movies={trendingNow} />
           <Row title="Top Rated" movies={topRated} />

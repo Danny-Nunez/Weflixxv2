@@ -54,7 +54,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
 
   return (
     <div className="w-full">
-      <div className="text-white font-bold text-lg mb-2">{episodeTitle}</div>
+      {/* <div className="text-white font-bold text-lg mb-2">{episodeTitle}</div> */}
       {isLoading ? (
         <CircularProgress /> // Render the preloader when loading
       ) : (
@@ -74,6 +74,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
               src={movieUrl}
               autoPlay={true}
               controls={true}
+              title={episodeTitle}
+              color="red"
               width="100%"
               height="auto"
             />
