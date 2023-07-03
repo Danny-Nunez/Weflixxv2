@@ -81,6 +81,8 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
   const [stillPath, setStillPath] = useState<string>('');
   const [episodeOverview, setEpisodeOverview] = useState<string>(''); // Add this line at the beginning of the component
   const axios = require('axios');
+  const [posterUrl, setPosterUrl] = useState('');
+
 
 
   useEffect(() => {
@@ -89,6 +91,9 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
         const movieInfoResponse = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}info?mediaId=${movie?.id}`
         );
+        const movieInfoData = movieInfoResponse.data.data;
+
+        setMovieInfo(movieInfoData);
         setMovieInfo(movieInfoResponse.data);
   
         if (
@@ -113,6 +118,11 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
           // Set the selected season to the latest season on load
           setSelectedSeason(latestSeasonNumber);
         }
+        if (movieInfoData?.cover) {
+          setPosterUrl(movieInfoData.cover);
+          console.log('Cover URL:', movieInfoData.cover);
+        }
+
       } catch (error) {
         console.error('Error fetching movie info:', error);
       }
@@ -441,6 +451,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
           episodeId={episodeId || ''} // Pass the episode ID or use an empty string as a fallback
           title={movie?.title}
           episodeTitle={episodeTitle} // Pass the episode title
+          coverUrl={posterUrl}
         />
       </div>
     </div>

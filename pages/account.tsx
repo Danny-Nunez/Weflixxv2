@@ -1,34 +1,89 @@
-import { getProducts, Product } from '@stripe/firestore-stripe-payments'
-import { GetStaticProps } from 'next'
-import Head from 'next/head'
-import Link from 'next/link'
-import Membership from '../components/Membership'
-import useAuth from '../hooks/useAuth'
-import useSubscription from '../hooks/useSubscription'
-import payments from '../lib/stripe'
-import Footer from '../components/Footer'
+import { useEffect, useRef, useState } from 'react';
+import { getProducts, Product } from '@stripe/firestore-stripe-payments';
+import { GetStaticProps } from 'next';
+import Head from 'next/head';
+import Link from 'next/link';
+import Membership from '../components/Membership';
+import useAuth from '../hooks/useAuth';
+import useSubscription from '../hooks/useSubscription';
+import payments from '../lib/stripe';
+import Footer from '../components/Footer';
+import { updateProfile } from 'firebase/auth';
 
-import { goToBillingPortal } from '../lib/stripe'
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { auth } from '../firebase'; // Add this line
+
+import { goToBillingPortal } from '../lib/stripe';
 
 interface Props {
-  products: Product[]
+  products: Product[];
 }
 
 function Account({ products }: Props) {
-  console.log(products)
-  const { user, logout } = useAuth()
-  const subscription = useSubscription(user)
+  console.log(products);
+  const { user, logout } = useAuth();
+  const subscription = useSubscription(user);
+  const storage = getStorage();
+
+
+  const [image, setImage] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setImage(e.target.files[0]);
+    }
+  };
+
+  const handleImageUpload = async () => {
+    if (image && user) { // Add null check for user object
+      try {
+        // Create a reference to the storage location
+        const storageRef = ref(storage, `profile-images/${user.uid}`);
+    
+        // Upload the image to Firebase Storage
+        await uploadBytes(storageRef, image);
+    
+        // Get the download URL of the uploaded image
+        const downloadURL = await getDownloadURL(storageRef);
+    
+        // Update the user's profile with the new photoURL
+        await updateProfile(user, {
+          photoURL: downloadURL,
+        });
+    
+        // Reset the image state
+        setImage(null);
+    
+        // Refresh the page to show the updated profile image
+        window.location.reload();
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
+    }
+  };
+  
+  
+  
+  
+
+  useEffect(() => {
+    // Clear the file input value on page load
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  }, []);
 
   const manageSubscription = () => {
     if (subscription) {
-      goToBillingPortal()
+      goToBillingPortal();
     }
-  }
+  };
 
   return (
     <div>
       <Head>
-        <title>Account Settings - Netflix</title>
+        <title>Account Settings - WeFlixx</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -43,12 +98,22 @@ function Account({ products }: Props) {
           />
         </Link>
         <Link href="/account">
-          <img
-            src="/adulticon.jpg"
-            alt=""
-            className="cursor-pointer rounded"
-          />
-        </Link>
+            <div className="relative rounded-full w-12 h-12 overflow-hidden">
+              {user?.photoURL ? (
+                <img
+                  src={user.photoURL}
+                  alt="Profile Image"
+                  className="cursor-pointer object-cover w-full h-full"
+                />
+              ) : (
+                <img
+                  src="/adulticon.jpg"
+                  alt=""
+                  className="cursor-pointer object-cover w-full h-full"
+                />
+              )}
+            </div>
+          </Link>
        
       </header>
 
@@ -64,6 +129,46 @@ function Account({ products }: Props) {
         </div>
 
         <Membership />
+
+        <div className=" mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0 ">
+  <h4 className="text-lg text-[gray]">Profile Image</h4>
+  <div className="relative rounded-full w-12 h-12 overflow-hidden">
+    {image ? (
+      <img
+        src={URL.createObjectURL(image)}
+        alt="Selected Image"
+        className="cursor-pointer object-cover w-full h-full"
+      />
+    ) : (
+      <img
+        src={user?.photoURL || "/adulticon.jpg"}
+        alt="Profile Image"
+        className="object-cover w-full h-full"
+      />
+    )}
+  </div>
+  <input
+    ref={fileInputRef}
+    type="file"
+    accept="image/*"
+    style={{ display: 'none' }}
+    onChange={handleImageChange}
+  />
+  <button
+    className="cursor-pointer text-blue-500 hover:underline"
+    onClick={() => fileInputRef.current?.click()}
+  >
+    Change Profile Image
+  </button>
+  {image && (
+    <button
+      className="bg-red-700 text-white px-4 py-2 rounded mt-2 hover:bg-red-600"
+      onClick={handleImageUpload}
+    >
+      Confirm
+    </button>
+  )}
+</div>
 
         <div className="mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0">
           <h4 className="text-lg text-[gray]">Plan Details</h4>
@@ -91,6 +196,7 @@ function Account({ products }: Props) {
         </div>
         <div className="relative lg:absolute bottom-0 left-0 w-full flex items-end justify-center"><Footer /></div>
       </main>
+     
     </div>
     
   )

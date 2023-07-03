@@ -8,7 +8,6 @@ import { modalState, movieState } from '../atoms/modalAtom'
 interface Movie {
   id: string,
   image: string,
-  
   title: string,
   description: string,
 }
@@ -20,54 +19,44 @@ function BannerWeflixx() {
   const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    const currentTime = new Date().getTime();
-    const lastFetchTime = Number(localStorage.getItem('lastFetchTime'));
-    
-    if (lastFetchTime && currentTime - lastFetchTime < 24 * 60 * 60 * 1000) {
-      const storedMoviesData = localStorage.getItem('moviesData');
-      
-      if (storedMoviesData) {
-        const movies = JSON.parse(storedMoviesData);
-        const selectedMovie = movies[Math.floor(Math.random() * movies.length)];
+    const fetchMoviesData = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
+        const data = await response.json();
+
+        const slider = data.data.slider;
+        const selectedMovie = slider[Math.floor(Math.random() * slider.length)];
+
         setMovie(selectedMovie);
+      } catch (error) {
+        console.error('Error fetching movies data:', error);
       }
-    } else {
-      
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}`)
-        .then(response => response.json())
-        .then(data => {
-          const slider = data.data.slider;
+    };
 
-          // Store the fetched data in local storage
-          localStorage.setItem('moviesData', JSON.stringify(slider));
-
-          // Save the time of this fetch
-          localStorage.setItem('lastFetchTime', String(currentTime));
-
-          // Select a random movie to display
-          const selectedMovie = slider[Math.floor(Math.random() * slider.length)];
-          setMovie(selectedMovie);
-        });
-    }
+    fetchMoviesData();
   }, []);
 
   const handleMoreInfoClick = async () => {
     setLoading(true); // set loading to true
-    if(movie?.title) {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}search/${movie.title}`);
-      const data = await response.json();
+    if (movie?.title) {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}search/${movie.title}`);
+        const data = await response.json();
 
-      if(data.data && data.data.results && data.data.results.length > 0) {
-        const movieWithId = data.data.results[0];
-        setCurrentMovie(movieWithId);
+        if (data.data && data.data.results && data.data.results.length > 0) {
+          const movieWithId = data.data.results[0];
+          setCurrentMovie(movieWithId);
+        }
+      } catch (error) {
+        console.error('Error fetching movie details:', error);
       }
     }
     setShowModal(true);
     setLoading(false); // set loading to false
   }
 
-  if (!movie) {  // if movie data has not been fetched yet
-    return <div>Loading...</div>;  // show a loading message
+  if (!movie) { // if movie data has not been fetched yet
+    return <div>Loading...</div>; // show a loading message
   }
 
   return (
@@ -77,30 +66,35 @@ function BannerWeflixx() {
           src={movie?.image}
           layout="fill"
           objectFit="cover"
+          onLoad={() => console.log('Image loaded')} // handle image load event
+          onError={() => console.log('Image error')} // handle image error event
         />
       </div>
 
       <h1 className="text-2xl font-bold md:text-3xl lg:text-6xl">
-        {movie?.title} 
+        {movie?.title}
       </h1>
       <p className="max-w-xs text-xs text-shadow-md md:max-w-lg md:text-lg lg:max-w-2xl lg:text-l">
         {movie?.description}
       </p>
 
       <div className="flex space-x-3">
-      <button
+        <button
           className="bannerButton bg-[gray]/70"
           onClick={handleMoreInfoClick}
           disabled={loading} // disable button while loading
         >
           {loading ? 'Loading...' : 'More Info'} <InformationCircleIcon className="h-5 w-5 md:h-8 md:w-8" />
         </button>
-        </div>
       </div>
-    )
-  }
-  
-  export default BannerWeflixx
+    </div>
+  )
+}
+
+export default BannerWeflixx
+
+
+
   
 
 

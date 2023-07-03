@@ -32,8 +32,8 @@ export default class LottieControl extends Component<{}, LottieControlState> {
       <div >
         <Lottie
           options={defaultOptions}
-          height={300}
-          width={300}
+          height={100}
+          width={100}
         />
       </div>
     );
