@@ -84,7 +84,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
         <Player src={sources} poster={coverUrl} subtitles={subtitles}>
           {(ref, props) =>
             isAppleDevice ? (
-              <video ref={ref} src={props.src} autoPlay={true} controls width="100%" height="auto">
+              <video ref={ref} autoPlay controls width="100%" height="auto">
                 {subtitles.map((subtitle) => (
                   <track key={subtitle.lang} src={subtitle.url} label={subtitle.language} kind="subtitles" srcLang={subtitle.lang} default={false} />
                 ))}
