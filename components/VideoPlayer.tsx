@@ -71,21 +71,34 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
     fetchUrl();
   }, [movieId, episodeId, coverUrl]);
 
+  const isAppleDevice =
+    ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform) ||
+    (navigator.userAgent.includes('Mac') && 'ontouchend' in document);
+
   return (
     <div className="w-full">
-      {isLoading ? (
-        <Weflixxloader />
-      ) : (
-        movieUrl && (
-          <Player src={sources} poster={coverUrl} subtitles={subtitles}>
-            {(ref, props) => <HlsPlayer playerRef={ref} {...props} />}
-          </Player>
-        )
-      )}
-    </div>
+    {isLoading ? (
+      <Weflixxloader />
+    ) : (
+      movieUrl && (
+        <Player src={sources} poster={coverUrl} subtitles={subtitles}>
+          {(ref, props) =>
+            isAppleDevice ? (
+              <video ref={ref} src={props.src} autoPlay={true} controls width="100%" height="auto">
+                {subtitles.map((subtitle) => (
+                  <track key={subtitle.lang} src={subtitle.url} label={subtitle.language} kind="subtitles" srcLang={subtitle.lang} default={false} />
+                ))}
+              </video>
+            ) : (
+              <HlsPlayer playerRef={ref} autoPlay={true} {...props} />
+            )
+          }
+        </Player>
+      )
+    )}
+  </div>
   );
 };
 
 export default VideoPlayer;
-
 
