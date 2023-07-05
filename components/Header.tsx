@@ -7,13 +7,19 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { useRouter } from 'next/router'
 import SearchForm from './SearchForm';
+import ProfileImage from './ProfileImage';
+
+
 // import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
+interface ProfileImageProps {
+  photoURL: string | null | undefined;
+}
 
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const { logout } = useAuth()
+  const { user, logout } = useAuth()
   const router = useRouter();
   const [query, setQuery] = useState("");
 
@@ -83,20 +89,15 @@ function Header() {
       <div className=" hidden md:inline  "><SearchForm query={query} setQuery={setQuery} onSubmit={handleSearch} /></div>
 
 
-      {/* <Menu as="div" className="relative inline-block text-left">
+      <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button className="inline-flex w-full justify-center gap-x-1.5 rounded-md  px-1 py-2 pb-1 pt-1 text-sm  ring-inset ring-gray-300 hover:text-gray-200">
-       <span className="pt-1 pl-1 menuShadow">Adult</span>
-       <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mt-2 ">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-</svg>
-       <img
-            src="/adulticon.jpg"
-            alt=""
-            className="cursor-pointer rounded h-7 mt-0"
-          />
+       {/* <span className="pt-1 pl-1 menuShadow">Adult</span> */}
+       
+    
          
-          
+       <ProfileImage photoURL={user?.photoURL || undefined} />
+      
 
         </Menu.Button>
       </div>
@@ -112,7 +113,7 @@ function Header() {
       >
         <Menu.Items className="absolute right-0 z-10 mt-1 w-26 origin-top-right border-1 rounded-md  ring-0 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            <Menu.Item>
+            {/* <Menu.Item>
               {({ active }) => (
                 <a
                   href="/kids"
@@ -128,7 +129,7 @@ function Header() {
           />
                 </a>
               )}
-            </Menu.Item>
+            </Menu.Item> */}
             <Menu.Item>
               {({ active }) => (
                 <a onClick={logout}
@@ -147,7 +148,7 @@ function Header() {
           </div>
         </Menu.Items>
       </Transition>
-    </Menu> */}
+    </Menu>
         {/* <p className="hidden lg:inline"><Link href="/">Adult</Link></p> */}
         {/* <BellIcon className="h-6 w-6" /> */}
         {/* <Link href="/account">

@@ -8,7 +8,7 @@ interface SearchFormProps {
 
   const SearchForm: React.FC<SearchFormProps> = ({ query, setQuery, onSubmit }) => {
     return (
-    <form className="max-w-sm px-4" onSubmit={onSubmit}>
+    <form className="max-w-sm px-6 mt-2" onSubmit={onSubmit}>
       <div className="relative">
         <svg
           xmlns="http://www.w3.org/2000/svg"
