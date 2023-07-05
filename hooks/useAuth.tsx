@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         .then(async (userCredential) => {
           setUser(userCredential.user);
           setLoading(false);
-          console.log('Redirecting to /');
+          // console.log('Redirecting to /');
           router.push('/');
   
           if (profileImageUrl) {
@@ -117,7 +117,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const user = userCredential.user;
   
       setUser(user);
-      console.log('Redirecting to /');
+      // console.log('Redirecting to /');
       router.push('/');
     } catch (error: unknown) {
       if (error instanceof Error) {

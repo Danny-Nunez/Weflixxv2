@@ -34,6 +34,7 @@
     "react-lottie": "^1.2.3",
     "react-player": "^2.10.0",
     "react-slick": "^0.29.0",
+    "react-tuby": "^0.1.24",
     "recoil": "^0.7.1",
     "rss-parser": "^3.13.0",
     "slick-carousel": "^1.8.1",

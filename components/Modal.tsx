@@ -105,7 +105,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
           // Set the first episode's ID
           const firstEpisodeId = movieInfoResponse.data.data.episodes[0].id;
           setEpisodeId(firstEpisodeId);
-          console.log('Episode ID:', firstEpisodeId); // Log the episode ID
+          // console.log('Episode ID:', firstEpisodeId); // Log the episode ID
   
           // Find the latest season
           const latestSeasonNumber = Math.max(
@@ -167,7 +167,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
   
       if (searchData.results.length > 0) {
         const movieId = searchData.results[0].id;
-        console.log('Movie ID:', movieId); // Log the movie ID
+        // console.log('Movie ID:', movieId); // Log the movie ID
   
         const fetchSeasonData = async () => {
           if (movieId && selectedSeason) {
@@ -196,8 +196,8 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
               setStillPath(updatedEpisodes[0].still_path);
               setEpisodeTitle(title);
         
-              console.log('Episodes:', updatedEpisodes);
-              console.log('Image URL:', updatedEpisodes[0].still_path);
+              // console.log('Episodes:', updatedEpisodes);
+              // console.log('Image URL:', updatedEpisodes[0].still_path);
             } catch (error) {
               console.error('Error fetching still path:', error);
             }
@@ -431,10 +431,10 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
         </div>
 
         {showPopup && (
-  <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50">
+  <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center z-50 overflow-auto">
     <div className="absolute top-0 left-0 w-full h-full bg-black opacity-100"></div>
-    <div className="relative bg-[#000000] border-red-900 border rounded-lg shadow-lg px-0 py-12 w-full sm:w-11/12">
-      <button onClick={closePopup} className="absolute top-2 right-2 text-white hover:text-gray-300 focus:text-gray-300">
+    <div className="relative bg-[#000000] border-red-900 border rounded-lg shadow-lg px-0 py-12 w-full sm:w-11/12 max-h-full overflow-auto">
+      <button onClick={closePopup} className="absolute top-2 right-2 z-10 text-white hover:text-gray-300 focus:text-gray-300">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-8 w-8 bg-[#2d2d2d] rounded-2xl p-1"
@@ -457,6 +457,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
     </div>
   </div>
 )}
+
 
 
         <div className="flex space-x-16 rounded-b-md bg-[#181818] px-10 py-8">
@@ -574,7 +575,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
 {episodes
   .filter((episode) => episode.season === selectedSeason)
   .map((episode) => {
-    console.log('Episode Still Path:', episode.still_path); // Log the still_path
+    // console.log('Episode Still Path:', episode.still_path); // Log the still_path
 
     return (
       <li key={episode.id} className="flex items-center space-x-4">

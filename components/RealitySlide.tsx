@@ -22,11 +22,11 @@ function RealitySlide({ title }: { title: string }) {
   useEffect(() => {
     const fetchMovies = async () => {
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}genre/reality`;
-      console.log('API URL:', apiUrl); // Check the API URL
+      // console.log('API URL:', apiUrl); // Check the API URL
 
       try {
         const response = await axios.get(apiUrl);
-        console.log('Response:', response); // Check the response object
+        // console.log('Response:', response); // Check the response object
 
         if (
           response.data &&
