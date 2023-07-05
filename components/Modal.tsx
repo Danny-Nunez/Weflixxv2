@@ -120,7 +120,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
         }
         if (movieInfoData?.cover) {
           setPosterUrl(movieInfoData.cover);
-          console.log('Cover URL:', movieInfoData.cover);
+          // console.log('Cover URL:', movieInfoData.cover);
         }
 
       } catch (error) {
