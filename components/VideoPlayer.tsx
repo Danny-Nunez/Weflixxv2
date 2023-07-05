@@ -43,9 +43,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
       const fetchedSubtitles = data.data.subtiles.map((subtitle: { url: string; lang: string }) => ({
         lang: subtitle.lang,
         url: subtitle.url,
-        language: subtitle.lang,
+        language: subtitle.lang.includes('English') ? 'English' : subtitle.lang,
       }));
-      setSubtitles(fetchedSubtitles);
+      
+      // Filter subtitles to get the English subtitle as default
+      const englishSubtitle = fetchedSubtitles.find((subtitle: { lang: string }) => subtitle.lang.includes('English'));
+      
+      setSubtitles(englishSubtitle ? [englishSubtitle, ...fetchedSubtitles] : []);
+      
 
       const fetchedSources = sources.map((source: { quality: string; url: string }) => ({
         quality: source.quality,

@@ -113,30 +113,14 @@ function Header() {
       >
         <Menu.Items className="absolute right-0 z-10 mt-1 w-26 origin-top-right border-1 rounded-md  ring-0 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            {/* <Menu.Item>
-              {({ active }) => (
-                <a
-                  href="/kids"
-                  className={classNames(
-                    active ? ' text-white-300' : 'text-gray-300',
-                    'block px-0 py-2 text-sm mr-1 '
-                  )}
-                >
-                  <span className="pr-2 menuShadow">Kids</span><img
-            src="/kidsicon.jpg"
-            alt=""
-            className="cursor-pointer rounded inline opacity-80 hover:opacity-100 h-7 mt-0"
-          />
-                </a>
-              )}
-            </Menu.Item> */}
+           
             <Menu.Item>
               {({ active }) => (
                 <a onClick={logout}
                   href="#"
                   className={classNames(
                     active ? 'text-white-300' : 'text-gray-300',
-                    'block px-0 py-3 text-sm ml-3'
+                    'block px-0 py-0 text-sm mr-1'
                   )}
                 >
                   Logout
