@@ -41,6 +41,16 @@
     outline: 8px ridge rgba(170, 50, 220, .6);border-radius: 2rem;
   }
  
+  .triangle:hover svg {
+    transition: transform .2s ease-in-out;
+    transform: rotate(180deg);
+  }
+  .triangle svg {
+    transition: transform .2s ease-in-out;
+   
+  }
+  
+
   .searchSize {
     margin-right: -40px;
     margin-left: 40px;
