@@ -78,7 +78,7 @@ function Header() {
 
       <div onMouseEnter={() => setIsShowing(true)}
             onMouseLeave={() => setIsShowing(false)} 
-            className="flex text-sm font-light triangle">
+            className=" text-sm font-light triangle hidden md:flex">
         <div className="hidden md:inline">
           <SearchForm query={query} setQuery={setQuery} onSubmit={handleSearch} />
         </div>
