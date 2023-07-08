@@ -40,7 +40,6 @@ const SearchForm: React.FC<SearchFormProps> = ({ query, setQuery, onSubmit }) =>
           required
           onChange={(event) => setQuery(event.target.value)}
           onBlur={handleBlur}
-          readOnly={!isClicked}
         />
       </div>
     </form>
@@ -48,6 +47,8 @@ const SearchForm: React.FC<SearchFormProps> = ({ query, setQuery, onSubmit }) =>
 };
 
 export default SearchForm;
+
+
 
 
 
