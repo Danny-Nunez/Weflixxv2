@@ -19,6 +19,7 @@ function Header() {
   const router = useRouter();
   const [isShowing, setIsShowing] = useState(false)
   const [query, setQuery] = useState("");
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,7 +50,8 @@ function Header() {
   };
 
   return (
-    <header className={`${isScrolled && 'bg-[#000]'}`}>
+    
+    <header className={`${isScrolled ? 'bg-black' : 'bg-gradient-to-t from-transparent to-black'} transition-all duration-500 ease-in-out`}>
       <div className="flex items-center space-x-3 md:space-x-10">
         <img
           src="/weflixxlogo.svg"
@@ -76,13 +78,13 @@ function Header() {
         </ul>
       </div>
 
-      <div onMouseEnter={() => setIsShowing(true)}
-            onMouseLeave={() => setIsShowing(false)} 
-            className=" text-sm font-light triangle hidden md:flex">
-        <div className="hidden md:inline">
+      <div className="flex flex-row" >
+        <div className=" hidden md:inline">
           <SearchForm query={query} setQuery={setQuery} onSubmit={handleSearch} />
         </div>
-
+        <div onMouseEnter={() => setIsShowing(true)}
+            onMouseLeave={() => setIsShowing(false)} 
+            className=" text-sm font-light triangle hidden md:flex">
         <Menu as="div" className="relative inline-block text-left">
           <div>
             <Menu.Button 
@@ -155,9 +157,10 @@ function Header() {
             </Menu.Items>
           </Transition>
         </Menu>
-
+        </div>
       </div>
     </header>
+   
   );
 }
 

@@ -77,7 +77,7 @@ const Home = ({
         {/* <Banner netflixOriginals={netflixOriginals} /> */}
         <BannerWeflixx />
         <section className="md:space-y-24">
-        <div className="pt-20 lg:pt-20"><TrendSlide title="Trending Now" /></div>
+        <div className="pt-10 lg:pt-10"><TrendSlide title="Trending Now" /></div>
           <div className="pt-40 lg:pt-20 md:pt-20"><LatestSlide title="Latest Movies" /></div>
           <div className="pt-40 lg:pt-20 md:pt-20"><LatestTvSlide title="Latest TvShows" /></div>
           <div className="pt-40 lg:pt-20 md:pt-20"><RealitySlide title="Exciting Reality Tv" /></div>
