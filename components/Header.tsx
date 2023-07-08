@@ -52,7 +52,7 @@ function Header() {
   return (
     
     <header className={`${isScrolled ? 'bg-black' : 'bg-gradient-to-t from-transparent to-black'} transition-all duration-500 ease-in-out`}>
-      <div className="flex items-center space-x-3 md:space-x-10">
+      <div className="flex items-center space-x-3 mr-12 md:space-x-10">
         <img
           src="/weflixxlogo.svg"
           width={100}
@@ -79,7 +79,7 @@ function Header() {
       </div>
 
       <div className="flex flex-row" >
-        <div className=" hidden md:inline">
+        <div className=" inline md:inline">
           <SearchForm query={query} setQuery={setQuery} onSubmit={handleSearch} />
         </div>
         <div onMouseEnter={() => setIsShowing(true)}

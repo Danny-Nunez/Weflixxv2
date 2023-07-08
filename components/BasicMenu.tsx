@@ -56,9 +56,9 @@ export default function BasicMenu() {
         <MenuItem onClick={handleClose}><Link href="/">Movies</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link href="/news">News</Link></MenuItem>
         <MenuItem onClick={handleClose}><Link href="/mylist">My List</Link></MenuItem>
-        <MenuItem >
+        {/* <MenuItem >
         <SearchFormMobile query={query} setQuery={setQuery} onSubmit={handleSearch} />
-        </MenuItem>
+        </MenuItem> */}
       </Menu>
     </div>
   )
