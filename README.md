@@ -1,6 +1,28 @@
-# Next.js + Tailwind CSS Example
+## Main technology used
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+- NextJS, Typescript 
+- TMDB api
+- Tailwind CSS
+- Firebase
+- Redux, Redux toolkit (State management)
+- Axios, Swr (Support fetching data)
+- React-toastify, react-hot-toast (Message UI)
+- react-hls-player (Media player video m3u8 wrapped with react tuby)
+- Api from Flixcore deployed to Aws
+
+![NextJS](https://img.shields.io/badge/-NextJs-000000?logo=nextdotjs) ![Typescript](https://img.shields.io/badge/-Typerscript-000000?logo=typescript) ![Sass](https://img.shields.io/badge/-Sass-black?logo=sass) ![Redux](https://img.shields.io/badge/-Redux-black?logo=redux) ![NodeJS](https://img.shields.io/badge/-NodeJS-black?logo=nodedotjs) ![Axios](https://img.shields.io/badge/-Axios-black?logo=axios) ![Vercel](https://img.shields.io/badge/-Vercel-black?logo=vercel) ![Firebase](https://img.shields.io/badge/-Firebase-black?logo=firebase) ![IMDB](https://img.shields.io/badge/-IMDB-black?logo=imdb)
+
+## Features
+
+- Full HD movies with subtitles in many languages
+- Netflix style layout
+- Search movie by name, with suggestion keywords, filter movie by type (category, area, year,...)
+- Profile page: allowing to change profile photo avatar, fullname, password.
+- Trailers for movies and tv shows 
+- Save history you watch, follow movie you like
+- Read latest breaking movie news
+- Optimize SEO and Responsive on many devices
+
 
 ## Deploy your own
 
