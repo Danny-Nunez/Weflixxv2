@@ -61,6 +61,19 @@ The 'MyList' feature securely stores your favorite movies and TV shows for your 
 - Read latest breaking movie news
 - Optimize SEO and Responsive on many devices
 
+## Env file structure
+
+Create a .env file in the main folder of your project<br/>
+NEXT_PUBLIC_API_KEY=<br/>
+NEXT_PUBLIC_FIREBASE_API_KEY=<br/>
+NEXT_PUBLIC_FIREBASEAPP_API_KEY=<br/>
+NEXT_PUBLIC_FIREBASEDATABASEURL_API_KEY=<br/>
+NEXT_PUBLIC_FIREBASEAUTHDOMAIN_API_KEY=<br/>
+NEXT_PUBLIC_FIREBASEMESSAGEID_API_KEY=<br/>
+NEXT_PUBLIC_FIREBASE_PROJECTID_API_KEY=<br/>
+NEXT_PUBLIC_FIREBASE_STORAGEBUCKET_API_KEY=<br/>
+NEXT_PUBLIC_API_URL=
+
 
 ## Deploy your own
 
