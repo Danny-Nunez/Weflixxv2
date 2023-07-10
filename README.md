@@ -17,6 +17,16 @@ This stunning interface, reminiscent of Netflix, is designed to give you a sense
 <img width="1329" alt="Screen Shot 2023-07-09 at 10 39 48 PM" src="https://github.com/Danny-Nunez/Weflixxv2/assets/114783191/7d247966-991c-4e60-bb17-f6e5f365771e">
 <img width="1320" alt="Screen Shot 2023-07-09 at 10 40 14 PM" src="https://github.com/Danny-Nunez/Weflixxv2/assets/114783191/06005ae5-34f8-4271-8632-1216f7906056">
 
+## MyAccount
+The 'MyAccount' feature allows you to oversee your monthly Stripe subscription to Weflixx and keep your user profile up-to-date.
+
+<img width="1301" alt="Screen Shot 2023-07-10 at 9 55 36 AM" src="https://github.com/Danny-Nunez/Weflixxv2/assets/114783191/f9ef6334-e79f-47c8-8adc-75a4ca12bee9">
+
+## News
+
+Our News feature leverages Moviefone's RSS feed to provide you with up-to-the-minute information about all the latest movie news.
+<img width="1300" alt="Screen Shot 2023-07-10 at 9 56 58 AM" src="https://github.com/Danny-Nunez/Weflixxv2/assets/114783191/d44a724b-f247-4262-8ffd-9b502cf73bbb">
+
 ## MyList
 The 'MyList' feature securely stores your favorite movies and TV shows for your convenience.
 
