@@ -18,8 +18,9 @@ This stunning interface, reminiscent of Netflix, is designed to give you a sense
 <img width="1320" alt="Screen Shot 2023-07-09 at 10 40 14 PM" src="https://github.com/Danny-Nunez/Weflixxv2/assets/114783191/06005ae5-34f8-4271-8632-1216f7906056">
 
 ## MyList
+The 'MyList' feature securely stores your favorite movies and TV shows for your convenience.
 
-
+<img width="1322" alt="Screen Shot 2023-07-09 at 10 42 32 PM" src="https://github.com/Danny-Nunez/Weflixxv2/assets/114783191/0ce9bb36-3241-4341-94ce-61876c639f36">
 
 ## Main technology used
 
