@@ -12,6 +12,13 @@ With Weflixx, you can delve into a world where the latest movies and hit TV show
 
 ## Preview
 
+This stunning interface, reminiscent of Netflix, is designed to give you a sense of familiarity and comfort. However, Weflixx distinguishes itself by offering the most up-to-date films and TV shows currently making waves in the entertainment world.
+
+<img width="1329" alt="Screen Shot 2023-07-09 at 10 39 48 PM" src="https://github.com/Danny-Nunez/Weflixxv2/assets/114783191/7d247966-991c-4e60-bb17-f6e5f365771e">
+<img width="1320" alt="Screen Shot 2023-07-09 at 10 40 14 PM" src="https://github.com/Danny-Nunez/Weflixxv2/assets/114783191/06005ae5-34f8-4271-8632-1216f7906056">
+
+## MyList
+
 
 
 ## Main technology used
