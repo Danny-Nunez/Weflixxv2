@@ -45,7 +45,7 @@ const News = () => {
     <div>
       
       <Header />
-      <div className="backgroundMaster mt-20 grid-col m-auto relative pl-4 pr-4 pb-24 lg:space-y-24 lg:pl-16 lg:pr-16 lg:w-4/5 md:w-4/5">
+      <div className="backgroundMaster mt-36 grid-col m-auto relative pl-4 pr-4 pb-24 lg:space-y-24 lg:pl-16 lg:pr-16 lg:w-4/5 md:w-4/5">
       {/* <NewsBanner /> */}
       
       {movies.map((movie) => (
