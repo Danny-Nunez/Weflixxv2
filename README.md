@@ -1,3 +1,12 @@
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/114783191/219676457-1e972ab3-839f-4d70-9139-edddb4f95497.png">
+</p>
+Welcome to Weflixx, the ultimate destination for all your entertainment cravings! Just like Netflix, Weflixx brings you a plethora of cinematic treasures from around the globe. Here, you can indulge in a wide array of genres and categories, featuring the very latest releases, classic masterpieces, and everything in between.
+
+Whether you're a fan of heart-racing thrillers, eye-watering dramas, laughter-inducing comedies, or awe-inspiring sci-fi, Weflixx has got you covered. But that's not all. We also host an extensive collection of television shows, from cult classics to trending series, catering to the diverse tastes of our audience.
+
+With Weflixx, you can delve into a world where the latest movies and hit TV shows are all in one place. So grab your popcorn, find your perfect spot, and immerse yourself in the unique Weflixx experience. Enjoy unlimited streaming and explore a world of entertainment at your fingertips. It's time to redefine what you know about online streaming – welcome to Weflixx.
+
 ## Main technology used
 
 - NextJS, Typescript 
