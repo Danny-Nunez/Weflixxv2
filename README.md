@@ -14,6 +14,10 @@ With Weflixx, you can delve into a world where the latest movies and hit TV show
 
 - Official website 👉 https://weflixx.com
 
+ <img src="https://dannyfullstack.dev/weflixxxdemo.gif" width="960">
+
+
+
 ## Preview
 
 This stunning interface, reminiscent of Netflix, is designed to give you a sense of familiarity and comfort. However, Weflixx distinguishes itself by offering the most up-to-date films and TV shows currently making waves in the entertainment world.
