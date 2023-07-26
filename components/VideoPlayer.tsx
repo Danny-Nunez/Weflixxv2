@@ -32,7 +32,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
 
   const fetchMovieUrl = async (id: string, episodeId: string): Promise<string> => {
     try {
-      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}streaming?mediaId=${id}&episodeId=${episodeId}`;
+      const apiUrl = `https://consumet-two.vercel.app/movies/flixhq/streaming?mediaId=${id}&episodeId=${episodeId}`;
       const response = await fetch(apiUrl);
       const data = await response.json();
 
