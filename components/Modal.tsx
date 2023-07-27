@@ -124,7 +124,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
         }
 
       } catch (error) {
-        console.error('Error fetching movie info:', error);
+        // console.error('Error fetching movie info:', error);
       }
     };
   
@@ -199,7 +199,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
               // console.log('Episodes:', updatedEpisodes);
               // console.log('Image URL:', updatedEpisodes[0].still_path);
             } catch (error) {
-              console.error('Error fetching still path:', error);
+              // console.error('Error fetching still path:', error);
             }
           }
         };
@@ -224,7 +224,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
             }
             
           } catch (error) {
-            console.error('Error fetching trailer:', error);
+            // console.error('Error fetching trailer:', error);
           }
         };
   
@@ -255,7 +255,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
 
   const handleList = async () => {
     if (!movie?.id) {
-      console.error("Movie ID is empty");
+      // console.error("Movie ID is empty");
       return;
     }
   
@@ -394,17 +394,21 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
 
           <div className="absolute bottom-10 flex w-full items-center justify-between px-10">
             <div className="flex space-x-2">
-            {movie?.type === 'movie' && (
+            {/* {movie?.type === 'movie' && (
             <button
             className="flex items-center gap-x-2 rounded bg-white px-3 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"
             onClick={() => episodeId && handlePlay(episodeId)}
           >
             Watch Now<FaPlay className="h-5 w-5 text-black" />
           </button>
-          
-          
-          )}
+          )} */}
 
+<button
+            className="flex items-center gap-x-2 rounded bg-white px-3 text-xl font-bold text-black transition hover:bg-[#e6e6e6]"
+            onClick={() => episodeId && handlePlay(episodeId)}
+          >
+            Watch Now<FaPlay className="h-5 w-5 text-black" />
+          </button>
 
 
               <button className="modalButton" onClick={handleList}>

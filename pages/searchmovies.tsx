@@ -5,6 +5,7 @@ import { useRecoilState } from 'recoil';
 import Modal from '../components/Modal';
 import Header from '../components/Header';
 
+
 interface Movie {
   id: string;
   title: string;
@@ -50,16 +51,16 @@ const SearchMovies = () => {
   const searchMovies = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}search/${query}?page=${pagination.currentPage}`
+        `${process.env.NEXT_PUBLIC_MOVIE_URL}${query}?page=${pagination.currentPage}`
       );
       const data = await response.json();
-      setMovies(data?.data?.results ?? []);
+      setMovies(data?.results ?? []);
       setPagination({
-        currentPage: data?.data?.currentPage ?? 1,
-        hasNextPage: data?.data?.hasNextPage ?? false,
+        currentPage: data?.currentPage ?? 1,
+        hasNextPage: data?.hasNextPage ?? false,
       });
     } catch (error) {
-      console.error('Error searching movies:', error);
+      // console.error('Error searching movies:', error);
     }
   };
 
@@ -96,22 +97,19 @@ const SearchMovies = () => {
           </div>
           <div className="grid grid-cols-2 gap-2 pt-4 lg:grid-cols-6 md:grid-cols-3">
          
-            {movies?.length > 0 &&
-              movies
-                .filter((movie) => movie?.image)
-                .map((movie) => (
-                  <div key={movie?.id}>
-                    <img
-                      className="rounded h-44 w-auto m-auto cursor-pointer md:h-48 lg:h-52"
-                      src={movie?.image}
-                      alt={movie?.title}
-                      onClick={() => handleModalOpen(movie)}
-                      />
-                      <h2 className="text-xs pt-2 pb-4 text-center sm:text-lg">
-                        {movie?.title}
-                      </h2>
-                    </div>
-                  ))}
+             {movies?.map((movie) => (
+              <div key={movie?.id}>
+                <img
+                  className="rounded h-44 w-auto m-auto cursor-pointer md:h-48 lg:h-52"
+                  src={movie?.image}
+                  alt={movie?.title}
+                  onClick={() => handleModalOpen(movie)}
+                />
+                <h2 className="text-xs pt-2 pb-4 text-center sm:text-lg">
+                  {movie?.title}
+                </h2>
+              </div>
+            ))}
             </div>
   
             <div className="flex justify-center mt-4">

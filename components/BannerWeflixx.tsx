@@ -40,15 +40,15 @@ function BannerWeflixx() {
     setLoading(true); // set loading to true
     if (movie?.title) {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}search/${movie.title}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_MOVIE_URL}${movie.title}`);
         const data = await response.json();
 
-        if (data.data && data.data.results && data.data.results.length > 0) {
-          const movieWithId = data.data.results[0];
+        if (data && data.results && data.results.length > 0) {
+          const movieWithId = data.results[0];
           setCurrentMovie(movieWithId);
         }
       } catch (error) {
-        console.error('Error fetching movie details:', error);
+        // console.error('Error fetching movie details:', error);
       }
     }
     setShowModal(true);

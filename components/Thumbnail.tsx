@@ -16,7 +16,7 @@ function Thumbnail({ movie }: Props) {
 
   useEffect(() => {
     // Fetch movie data from API and update imageUrl
-    fetch(`https://api.weflixx.com/api/info?mediaId=${movie.id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}info?mediaId=${movie.id}`)
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {

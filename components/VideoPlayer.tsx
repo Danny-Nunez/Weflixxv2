@@ -32,38 +32,48 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
 
   const fetchMovieUrl = async (id: string, episodeId: string): Promise<string> => {
     try {
-      const apiUrl = `https://consumet-two.vercel.app/movies/flixhq/streaming?mediaId=${id}&episodeId=${episodeId}`;
+      const apiUrl = `${process.env.NEXT_PUBLIC_MOVIE_URL}watch?episodeId=${episodeId}&mediaId=${id}`;
+      // console.log(apiUrl);
+      // console.log('Fetching movie URL with mediaId:', id, 'and episodeId:', episodeId);
       const response = await fetch(apiUrl);
       const data = await response.json();
-
-      const sources = data.data.sources;
-      const firstSource = sources[0];
-      const quality1080Url = firstSource ? firstSource.url : null;
-
-      const fetchedSubtitles = data.data.subtiles.map((subtitle: { url: string; lang: string }) => ({
-        lang: subtitle.lang,
-        url: subtitle.url,
-        language: subtitle.lang.includes('English') ? 'English' : subtitle.lang,
-      }));
-      
-      // Filter subtitles to get the English subtitle as default
-      const englishSubtitle = fetchedSubtitles.find((subtitle: { lang: string }) => subtitle.lang.includes('English'));
-      
-      setSubtitles(englishSubtitle ? [englishSubtitle, ...fetchedSubtitles] : []);
-      
-
-      const fetchedSources = sources.map((source: { quality: string; url: string }) => ({
-        quality: source.quality,
-        url: source.url,
-      }));
-      setSources(fetchedSources);
-
-      return quality1080Url;
+      // console.log('API Response:', data);
+  
+      // Check if the data object and its properties exist before accessing them
+      if (data && data.sources) {
+        const sources = data.sources;
+        const subtitles = data.subtitles;
+  
+        const firstSource = sources[0];
+        const quality1080Url = firstSource?.url || null;
+  
+        const fetchedSubtitles = subtitles.map((subtitle: { url: string; lang: string }) => ({
+          lang: subtitle.lang,
+          url: subtitle.url,
+          language: subtitle.lang.includes('English') ? 'English' : subtitle.lang,
+        }));
+  
+        const englishSubtitle = fetchedSubtitles.find((subtitle: { lang: string }) => subtitle.lang.includes('English'));
+  
+        setSubtitles(englishSubtitle ? [englishSubtitle, ...fetchedSubtitles] : []);
+  
+        const fetchedSources = sources.map((source: { quality: string; url: string }) => ({
+          quality: source.quality,
+          url: source.url,
+        }));
+        setSources(fetchedSources);
+  
+        return quality1080Url;
+      } else {
+        // console.error('Error fetching movie URL: Invalid data in API response');
+        return '';
+      }
     } catch (error) {
-      console.error('Error fetching movie URL:', error);
+      // console.error('Error fetching movie URL:', error);
       return '';
     }
   };
+  
 
   useEffect(() => {
     const fetchUrl = async () => {
