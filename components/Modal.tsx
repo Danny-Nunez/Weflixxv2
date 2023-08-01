@@ -7,7 +7,7 @@ import {
 } from '@heroicons/react/outline';
 import { VolumeUpIcon } from '@heroicons/react/solid';
 import MuiModal from '@mui/material/Modal';
-
+import LikeButton from './LikeButton'
 import {
   collection,
   deleteDoc,
@@ -82,6 +82,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
   const [episodeOverview, setEpisodeOverview] = useState<string>(''); // Add this line at the beginning of the component
   const axios = require('axios');
   const [posterUrl, setPosterUrl] = useState('');
+  const [movieIdSubstring, setMovieIdSubstring] = useState("");
 
 
 
@@ -236,6 +237,16 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
   }, [movie, selectedSeason]);
     
 
+  const getMovieIdStartSubstring = (movieId: string): string => {
+    const lastIndex = movieId.lastIndexOf('/');
+    return lastIndex !== -1 ? movieId.substring(0, lastIndex) : '';
+  };
+  
+  const getMovieIdEndSubstring = (movieId: string): string => {
+    const lastIndex = movieId.lastIndexOf('/');
+    return lastIndex !== -1 ? movieId.substring(lastIndex + 1) : '';
+  };
+
   // Find all the movies in the user's list
   useEffect(() => {
     if (user) {
@@ -262,6 +273,7 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
     const movieId = movie?.id.toString();
     const lastIndex = movieId.lastIndexOf('/');
     const movieIdSubstring = lastIndex !== -1 ? movieId.substring(lastIndex + 1) : '';
+    const movieIdEndSubstring = getMovieIdEndSubstring(movie?.id.toString());
   
     if (addedToList) {
       await deleteDoc(
@@ -419,9 +431,10 @@ function Modal({ openModal, closeModal }: { openModal: () => void, closeModal: (
                 )}
               </button>
 
-              {/* <button className="modalButton">
-                <ThumbUpIcon className="h-7 w-7" />
-              </button> */}
+              <button className="modalButton">
+                {/* <ThumbUpIcon className="h-7 w-7" /> */}
+                <LikeButton movieId={movie?.title || movie?.original_name} />
+              </button>
 
             </div>
             <button className="modalButton" onClick={() => setMuted(!muted)}>

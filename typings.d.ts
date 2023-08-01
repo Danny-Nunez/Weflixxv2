@@ -24,6 +24,8 @@ export interface Movie {
   description: string
   still_path?: string;
   type: string;
+  likes?: number;
+  likedUsers?: string[];
 }
 
 export interface Element {
