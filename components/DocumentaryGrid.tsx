@@ -1,3 +1,4 @@
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
 import { useRef, useState, useEffect } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -11,9 +12,8 @@ interface Movie {
   image: string;
 }
 
-function ActionGrid({ title }: { title: string }) {
+function DocumentaryGrid({ title }: { title: string }) {
   const rowRef = useRef<HTMLDivElement>(null);
-  const observerRef = useRef<HTMLDivElement>(null);
   const [isMoved, setIsMoved] = useState(false);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [currentPage, setCurrentPage] = useState(1); // Track the current page of data
@@ -22,7 +22,7 @@ function ActionGrid({ title }: { title: string }) {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}genre/action?page=${currentPage}`;
+      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}genre/documentary?page=${currentPage}`;
 
       try {
         const response = await axios.get(apiUrl);
@@ -46,41 +46,10 @@ function ActionGrid({ title }: { title: string }) {
     fetchMovies();
   }, [currentPage]); // Fetch data when currentPage changes
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Load more data when the observer target comes into the viewport
-            setCurrentPage((prevPage) => prevPage + 1);
-          }
-        });
-      },
-      {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1, // Percentage of the target element that needs to be visible for the callback to be triggered
-      }
-    );
-
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
-    }
-
-    return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
-      }
-    };
-  }, []);
-
   const handleScroll = () => {
-    if (
-      rowRef.current &&
-      window.innerHeight + window.scrollY >= rowRef.current.clientHeight
-    ) {
-      // Check if user has scrolled to the bottom of the component
-      // Load more data when scrolled to the bottom
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+      // Check if user has scrolled to the bottom of the page
+      // Load next page when scrolled to the bottom
       setCurrentPage((prevPage) => prevPage + 1);
     }
   };
@@ -118,8 +87,11 @@ function ActionGrid({ title }: { title: string }) {
       <h2 className="w-56 cursor-pointer text-sm font-semibold text-[#e5e5e5] transition duration-200 hover:text-white md:text-2xl">
         {title}
       </h2>
-      <div className="group relative md:-ml-2" ref={rowRef}>
-        <div className="flex flex-wrap gap-2.5 md:gap-4 lg:gap-5 md:p-2">
+      <div className="group relative md:-ml-2">
+        <div
+          ref={rowRef}
+          className="flex flex-wrap gap-2.5 md:gap-4 lg:gap-5 md:p-2"
+        >
           {movies.map((movie) => (
             <div key={movie.id} className="relative w-44 lg:w-48 md:w-48 h-auto mb-10 cursor-pointer hover:opacity-80 rounded" onClick={() => handleLatestSlideItemClick(movie)}>
               <LazyLoadImage
@@ -135,16 +107,11 @@ function ActionGrid({ title }: { title: string }) {
           ))}
         </div>
       </div>
-
-      {/* Use a ref to observe when this element comes into the viewport */}
-      <div ref={observerRef}></div>
     </div>
   );
 }
 
-export default ActionGrid;
-
-
+export default DocumentaryGrid;
 
 
 

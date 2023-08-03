@@ -128,12 +128,12 @@ function Header() {
             <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
             <img src="/documentary.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
-              <Link href="/action">Documentary</Link>
+              <Link href="/documentary">Documentary</Link>
             </li>
             <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
             <img src="/drama.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
-              <Link href="/action">Drama</Link>
+              <Link href="/drama">Drama</Link>
             </li>
             <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
             <img src="/family.png" width="16px" height="16px"
