@@ -26,6 +26,12 @@ export interface Movie {
   type: string;
   likes?: number;
   likedUsers?: string[];
+  detail: {
+    quality: string;
+    duration: string;
+    imdb: string;
+    genres: string[];
+  };
 }
 
 export interface Element {

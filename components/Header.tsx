@@ -20,6 +20,8 @@ function Header() {
   const [isShowing, setIsShowing] = useState(false)
   const [query, setQuery] = useState("");
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [isArrowRotated, setArrowRotated] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +51,10 @@ function Header() {
     });
   };
 
+  const handleArrowClick = () => {
+    setArrowRotated(!isArrowRotated);
+  };
+
   return (
     
     <header className={`${isScrolled ? 'bg-black' : 'bg-gradient-to-t from-transparent to-black'} transition-all duration-500 ease-in-out`}>
@@ -63,19 +69,103 @@ function Header() {
         <BasicMenu />
 
         <ul className="hidden space-x-4 md:flex">
-          <Link href="/">
-            <li className="headerLink menuShadow">Home</li>
-          </Link>
-          <Link href="/account">
-            <li className="headerLink menuShadow">My Account</li>
-          </Link>
-          <Link href="/news">
-            <li className="headerLink menuShadow">News</li>
-          </Link>
-          <Link href="/mylist">
-            <li className="headerLink menuShadow">My List</li>
-          </Link>
-        </ul>
+      <Link href="/">
+        <li className="headerLink menuShadow">Home</li>
+      </Link>
+
+      {/* New list item with a dropdown trigger */}
+      <li
+        className="headerLink menuShadow cursor-pointer relative"
+        onClick={() => setShowDropdown(!showDropdown)}
+      >
+        <div className="inline flex" onClick={handleArrowClick}>Categories
+        <svg
+        className={`flex mt-1 ml-1 arrowicon ${isArrowRotated ? 'rotate-180' : ''}`}
+        xmlns="http://www.w3.org/2000/svg"
+        width="14"
+        height="14"
+        fill="white"
+        viewBox="0 0 24 24"
+        onClick={handleArrowClick}
+      >
+        <path d="M18.5,15.5l-6-7l-6,7H18.5z" />
+      </svg>
+          </div>
+        {/* Dropdown content */}
+        {showDropdown && (
+          <ul className="absolute top-8 left-[-20px] bg-black shadow-md pl-4 pr-8 rounded-md">
+            {/* Links inside the dropdown */}
+            <li className="mb-3 mt-3 hover:underline cursor-pointer flex inline ">
+            <img src="/action.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/> 
+              <Link href="/action">Action</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <img src="/adventure.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/> 
+              <Link href="/adventure">Adventure</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <img src="/animation.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/> 
+              <Link href="/animation">Animation</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <img src="/biography.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/biography">Biography</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <img src="/comedy.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/comedy">Comedy</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <img src="/crime.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/crime">Crime</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <img src="/documentary.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/action">Documentary</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <img src="/drama.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/action">Drama</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <img src="/family.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/action">Family</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <img src="/fantasy.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/action">Fantasy</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <img src="/history.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/action">History</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <img src="/horror.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/action">Horror</Link>
+            </li>
+          </ul>
+        )}
+      </li>
+
+      <Link href="/news">
+        <li className="headerLink menuShadow">News</li>
+      </Link>
+      <Link href="/mylist">
+        <li className="headerLink menuShadow">My List</li>
+      </Link>
+    </ul>
       </div>
 
       <div className="flex flex-row" >

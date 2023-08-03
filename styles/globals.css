@@ -55,6 +55,10 @@
     margin-left: 40px;
   }
 
+  .rotate-180 {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease; /* Add a smooth transition effect */
+  }
   .menuShadow:hover {
     
     font-weight: 400;
