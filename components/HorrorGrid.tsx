@@ -11,7 +11,7 @@ interface Movie {
   image: string;
 }
 
-function BiographyGrid({ title }: { title: string }) {
+function HorrorGrid({ title }: { title: string }) {
   const rowRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<HTMLDivElement>(null);
   const [isMoved, setIsMoved] = useState(false);
@@ -22,7 +22,7 @@ function BiographyGrid({ title }: { title: string }) {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}genre/biography?page=${currentPage}`;
+      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}genre/horror?page=${currentPage}`;
 
       try {
         const response = await axios.get(apiUrl);
@@ -142,7 +142,7 @@ function BiographyGrid({ title }: { title: string }) {
   );
 }
 
-export default BiographyGrid;
+export default HorrorGrid;
 
 
 

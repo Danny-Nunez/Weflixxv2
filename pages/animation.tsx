@@ -35,7 +35,7 @@ const AnimationList = ({ netflixOriginals, products }: Props) => {
       }`}
     >
       <Head>
-        <title>Animation Movies- WeFlixx</title>
+        <title>Animation Genre- WeFlixx</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
@@ -43,7 +43,7 @@ const AnimationList = ({ netflixOriginals, products }: Props) => {
       <main className="backgroundMaster relative pl-4 lg:space-y-24 lg:pl-16">
         <AnimationBanner />
         <section className="md:space-y-24">
-          <AnimationGrid title="Animation Movies" />
+          <AnimationGrid title="Animation" />
         </section>
        {/* <div className="  items-end justify-center"><Footer /></div> */}
       </main>

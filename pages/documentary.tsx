@@ -35,7 +35,7 @@ const DocumentaryList = ({ netflixOriginals, products }: Props) => {
       }`}
     >
       <Head>
-        <title>Documentary Movies- WeFlixx</title>
+        <title>Documentary Genre- WeFlixx</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
@@ -43,7 +43,7 @@ const DocumentaryList = ({ netflixOriginals, products }: Props) => {
       <main className="backgroundMaster relative pl-4 lg:space-y-24 lg:pl-16">
         <DocumentaryBanner />
         <section className="md:space-y-24">
-          <DocumentaryGrid title="Documentary Movies" />
+          <DocumentaryGrid title="Documentary" />
         </section>
        {/* <div className="  items-end justify-center"><Footer /></div> */}
       </main>

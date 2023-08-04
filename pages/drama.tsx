@@ -35,7 +35,7 @@ const DramaList = ({ netflixOriginals, products }: Props) => {
       }`}
     >
       <Head>
-        <title>Drama Movies- WeFlixx</title>
+        <title>Drama Genre- WeFlixx</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
@@ -43,7 +43,7 @@ const DramaList = ({ netflixOriginals, products }: Props) => {
       <main className="backgroundMaster relative pl-4 lg:space-y-24 lg:pl-16">
         <DramaBanner />
         <section className="md:space-y-24">
-          <DramaGrid title="Drama Movies" />
+          <DramaGrid title="Drama" />
         </section>
        {/* <div className="  items-end justify-center"><Footer /></div> */}
       </main>

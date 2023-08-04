@@ -35,7 +35,7 @@ const BiographyList = ({ netflixOriginals, products }: Props) => {
       }`}
     >
       <Head>
-        <title>Biography Movies- WeFlixx</title>
+        <title>Biography Genre- WeFlixx</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
@@ -43,7 +43,7 @@ const BiographyList = ({ netflixOriginals, products }: Props) => {
       <main className="backgroundMaster relative pl-4 lg:space-y-24 lg:pl-16">
         <BiographyBanner />
         <section className="md:space-y-24">
-          <BiographyGrid title="Biography Movies" />
+          <BiographyGrid title="Biography" />
         </section>
        {/* <div className="  items-end justify-center"><Footer /></div> */}
       </main>

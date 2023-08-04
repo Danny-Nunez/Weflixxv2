@@ -1,14 +1,14 @@
 import Head from 'next/head'
 import { useRecoilValue } from 'recoil'
 import { modalState, movieState } from '../atoms/modalAtom'
-import ActionBanner from '../components/ActionBanner'
+import HistoryBanner from '../components/HistoryBanner'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Modal from '../components/Modal'
 import Row from '../components/Row'
 import useAuth from '../hooks/useAuth'
 import useList from '../hooks/useList'
-import ActionGrid from '../components/ActionGrid'
+import HistoryGrid from '../components/HistoryGrid'
 import useSubscription from '../hooks/useSubscription'
 import { Movie } from '../typings'
 import requests from '../utils/requests'
@@ -20,7 +20,7 @@ interface Props {
   title: string;
 }
 
-const ActionList = ({ netflixOriginals, products }: Props) => {
+const HistoryList = ({ netflixOriginals, products }: Props) => {
   const { loading, user } = useAuth()
   const showModal = useRecoilValue(modalState)
   const movie = useRecoilValue(movieState)
@@ -35,17 +35,15 @@ const ActionList = ({ netflixOriginals, products }: Props) => {
       }`}
     >
       <Head>
-        <title>Action Genre - WeFlixx</title>
+        <title>History Genre- WeFlixx</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
       <Header />
       <main className="backgroundMaster relative pl-4 lg:space-y-24 lg:pl-16">
-        <ActionBanner />
+        <HistoryBanner />
         <section className="md:space-y-24">
-          <div>
-          <ActionGrid title="Action" />
-          </div>
+          <HistoryGrid title="History" />
         </section>
        {/* <div className="  items-end justify-center"><Footer /></div> */}
       </main>
@@ -54,7 +52,7 @@ const ActionList = ({ netflixOriginals, products }: Props) => {
   )
 }
 
-export default ActionList
+export default HistoryList
 
 export const getServerSideProps = async () => {
   const [

@@ -35,7 +35,7 @@ const AdventureList = ({ netflixOriginals, products }: Props) => {
       }`}
     >
       <Head>
-        <title>Adventure Movies- WeFlixx</title>
+        <title>Adventure Genre- WeFlixx</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
@@ -43,7 +43,7 @@ const AdventureList = ({ netflixOriginals, products }: Props) => {
       <main className="backgroundMaster relative pl-4 lg:space-y-24 lg:pl-16">
         <AdventureBanner />
         <section className="md:space-y-24">
-          <AdventureGrid title="Adventure Movies" />
+          <AdventureGrid title="Adventure" />
         </section>
        {/* <div className="  items-end justify-center"><Footer /></div> */}
       </main>

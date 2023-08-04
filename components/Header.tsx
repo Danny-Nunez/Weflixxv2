@@ -78,7 +78,7 @@ function Header() {
         className="headerLink menuShadow cursor-pointer relative"
         onClick={() => setShowDropdown(!showDropdown)}
       >
-        <div className="inline flex" onClick={handleArrowClick}>Categories
+        <div className="inline flex" onClick={handleArrowClick}>Genre
         <svg
         className={`flex mt-1 ml-1 arrowicon ${isArrowRotated ? 'rotate-180' : ''}`}
         xmlns="http://www.w3.org/2000/svg"
@@ -138,22 +138,22 @@ function Header() {
             <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
             <img src="/family.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
-              <Link href="/action">Family</Link>
+              <Link href="/family">Family</Link>
             </li>
             <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
             <img src="/fantasy.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
-              <Link href="/action">Fantasy</Link>
+              <Link href="/fantasy">Fantasy</Link>
             </li>
             <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
             <img src="/history.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
-              <Link href="/action">History</Link>
+              <Link href="/history">History</Link>
             </li>
             <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
             <img src="/horror.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
-              <Link href="/action">Horror</Link>
+              <Link href="/horror">Horror</Link>
             </li>
           </ul>
         )}

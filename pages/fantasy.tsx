@@ -1,14 +1,14 @@
 import Head from 'next/head'
 import { useRecoilValue } from 'recoil'
 import { modalState, movieState } from '../atoms/modalAtom'
-import ActionBanner from '../components/ActionBanner'
+import FantasyBanner from '../components/FantasyBanner'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Modal from '../components/Modal'
 import Row from '../components/Row'
 import useAuth from '../hooks/useAuth'
 import useList from '../hooks/useList'
-import ActionGrid from '../components/ActionGrid'
+import FantasyGrid from '../components/FantasyGrid'
 import useSubscription from '../hooks/useSubscription'
 import { Movie } from '../typings'
 import requests from '../utils/requests'
@@ -20,7 +20,7 @@ interface Props {
   title: string;
 }
 
-const ActionList = ({ netflixOriginals, products }: Props) => {
+const FantasyList = ({ netflixOriginals, products }: Props) => {
   const { loading, user } = useAuth()
   const showModal = useRecoilValue(modalState)
   const movie = useRecoilValue(movieState)
@@ -35,17 +35,15 @@ const ActionList = ({ netflixOriginals, products }: Props) => {
       }`}
     >
       <Head>
-        <title>Action Genre - WeFlixx</title>
+        <title>Fantasy Genre- WeFlixx</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
       <Header />
       <main className="backgroundMaster relative pl-4 lg:space-y-24 lg:pl-16">
-        <ActionBanner />
+        <FantasyBanner />
         <section className="md:space-y-24">
-          <div>
-          <ActionGrid title="Action" />
-          </div>
+          <FantasyGrid title="Fantasy" />
         </section>
        {/* <div className="  items-end justify-center"><Footer /></div> */}
       </main>
@@ -54,7 +52,7 @@ const ActionList = ({ netflixOriginals, products }: Props) => {
   )
 }
 
-export default ActionList
+export default FantasyList
 
 export const getServerSideProps = async () => {
   const [

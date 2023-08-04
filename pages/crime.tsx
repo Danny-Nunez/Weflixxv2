@@ -35,7 +35,7 @@ const CrimeList = ({ netflixOriginals, products }: Props) => {
       }`}
     >
       <Head>
-        <title>Crime Movies- WeFlixx</title>
+        <title>Crime Genre- WeFlixx</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
@@ -43,7 +43,7 @@ const CrimeList = ({ netflixOriginals, products }: Props) => {
       <main className="backgroundMaster relative pl-4 lg:space-y-24 lg:pl-16">
         <CrimeBanner />
         <section className="md:space-y-24">
-          <CrimeGrid title="Crime Movies" />
+          <CrimeGrid title="Crime" />
         </section>
        {/* <div className="  items-end justify-center"><Footer /></div> */}
       </main>
