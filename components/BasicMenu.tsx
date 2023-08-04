@@ -71,6 +71,34 @@ export default function BasicMenu() {
             
             <MenuItem>
               <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/adventure.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/adventure">Adventure</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/animation.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/animation">Animation</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/biography.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/biography">Biography</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/comedy.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/comedy">Comedy</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
                 <img src="/crime.png" width="16px" height="16px"
                     className="cursor-pointer object-contain ml-1 mr-2"/>
                 <Link href="/crime">Crime</Link>
@@ -78,9 +106,23 @@ export default function BasicMenu() {
             </MenuItem>
             <MenuItem>
               <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
-                <img src="/adventure.png" width="16px" height="16px"
+                <img src="/documentary.png" width="16px" height="16px"
                     className="cursor-pointer object-contain ml-1 mr-2"/>
-                <Link href="/adventure">Adventure</Link>
+                <Link href="/documentary">Documentary</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/drama.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/drama">Drama</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/family.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/family">Family</Link>
               </div>
             </MenuItem>
             <MenuItem>
@@ -92,9 +134,9 @@ export default function BasicMenu() {
             </MenuItem>
             <MenuItem>
               <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
-                <img src="/drama.png" width="16px" height="16px"
+                <img src="/history.png" width="16px" height="16px"
                     className="cursor-pointer object-contain ml-1 mr-2"/>
-                <Link href="/drama">Drama</Link>
+                <Link href="/history">History</Link>
               </div>
             </MenuItem>
             <MenuItem>
