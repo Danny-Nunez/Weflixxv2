@@ -36,38 +36,45 @@ export default function BasicMenu() {
 
   return (
     <div className="md:!hidden">
-      <Button
-        id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-        className="!capitalize !text-white"
-      >
-        Browse
-      </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        className="menu"
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem onClick={handleClose}><Link href="/">Home</Link></MenuItem>
-        <MenuItem onClick={handleClose}><Link href="/account">My Account</Link></MenuItem>
-        <MenuItem onClick={handleGenreClick}>Genre</MenuItem>
-        <Collapse in={isGenreOpen}>
-          <div className="w-72 grid grid-cols-2 gap-0 ">
-            <MenuItem>
-              <div className="hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
-                <img src="/action.png" width="16px" height="16px"
-                    className="cursor-pointer object-contain ml-1 mr-2"/>
-                <Link href="/action">Action</Link>
-              </div>
-            </MenuItem>
+    <Button
+      id="basic-button"
+      aria-controls={open ? 'basic-menu' : undefined}
+      aria-haspopup="true"
+      aria-expanded={open ? 'true' : undefined}
+      onClick={handleClick}
+      className="!capitalize !text-white"
+    >
+      Browse
+    </Button>
+    <Menu
+      id="basic-menu"
+      anchorEl={anchorEl}
+      open={open}
+      onClose={handleClose}
+      className="menu"
+      MenuListProps={{
+        'aria-labelledby': 'basic-button',
+      }}
+    >
+      <MenuItem onClick={handleClose}><Link href="/">Home</Link></MenuItem>
+      <MenuItem onClick={handleClose}><Link href="/account">My Account</Link></MenuItem>
+      <MenuItem onClick={handleGenreClick}>
+        <div className="flex inline justify-center pl-1">Genre
+        <img 
+          src={isGenreOpen ? "/minus.png" : "/plus.png"} 
+          alt={isGenreOpen ? "Collapse" : "Expand"}
+          className="ml-2 w-3 h-3 mt-1"
+        /></div>
+      </MenuItem>
+      <Collapse in={isGenreOpen}>
+        <div className="w-72 grid grid-cols-2 gap-0 ">
+          <MenuItem>
+            <div className="hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+              <img src="/action.png" width="16px" height="16px"
+                  className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/action">Action</Link>
+            </div>
+          </MenuItem>
             
             <MenuItem>
               <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
