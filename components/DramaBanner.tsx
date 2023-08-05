@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import axios from 'axios'; // Make sure to import axios
 import { useEffect, useState } from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { InformationCircleIcon } from '@heroicons/react/solid'
@@ -10,6 +11,7 @@ interface Movie {
   image: string;
   title: string;
   description: string;
+  cover: string;
   detail: {
     quality: string;
     duration: string;
@@ -23,34 +25,40 @@ function DramaBanner() {
   const [showModal, setShowModal] = useRecoilState(modalState)
   const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
   const [loading, setLoading] = useState<boolean>(false)
+  const [posterUrl, setPosterUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchMoviesData = async () => {
+    const fetchDramaMovie = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}genre/drama?page=1`);
         const data = await response.json();
-
-        const slider = data.data.slider;
-
-        // Filter movies by genre
-        const actionMovies = slider.filter((movie: Movie) => movie.detail?.genres.includes("Drama") || movie.detail?.genres.includes("Thriller"));
-
-
-        // If there are action movies available, select a random one
-        if (actionMovies.length > 0) {
-          const selectedMovie = actionMovies[Math.floor(Math.random() * actionMovies.length)];
-          setMovie(selectedMovie);
+  
+        if (data && data.data && data.data.results && data.data.results.length > 0) {
+          const firstMovie = data.data.results[0];
+          const movieId = firstMovie.id;
+  
+          // Fetch movie information using the ID
+          const movieInfoResponse = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_URL}info?mediaId=${movieId}`
+          );
+          const movieInfoData = movieInfoResponse.data.data;
+  
+          // Update the movie state with the fetched movie info
+          setMovie(movieInfoData);
+  
         } else {
-          // If no action movies are available, set the movie to null
-          setMovie(null);
+          console.error('Unexpected data structure:', data);
         }
       } catch (error) {
-        console.error('Error fetching movies data:', error);
+        console.error('Error fetching movie data:', error);
       }
     };
-
-    fetchMoviesData();
+  
+    fetchDramaMovie();
   }, []);
+
+  
+  
 
   const handleMoreInfoClick = async () => {
     setLoading(true); // set loading to true
@@ -78,13 +86,13 @@ function DramaBanner() {
   return (
     <div className="flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12">
       <div className="absolute top-0 left-0 -z-10 h-[95vh] w-screen">
-        <Image
-          src={movie?.image}
-          layout="fill"
-          objectFit="cover"
-          onLoad={() => console.log('Image loaded')} // handle image load event
-          onError={() => console.log('Image error')} // handle image error event
-        />
+      {movie?.cover && (
+  <Image
+    src={movie.cover}
+    layout="fill"
+    objectFit="cover"
+  />
+)}
       </div>
 
       <h1 className="text-2xl font-bold md:text-3xl lg:text-6xl">

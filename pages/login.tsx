@@ -180,7 +180,7 @@ function Login() {
         <div className=" m-auto pt-8 p-5 md:ml-0 md:pl-0">
           <h1 className="font-black text-4xl pb-8 md:text-5xl">Watch everywhere</h1>
           <p>Stream unlimited movies on your phone, tablet, laptop, and TV.</p>
-          <p className="font-bold ">The WeFixx you love for just $2.99 a month.</p>
+          <p className="font-bold ">The WeFlixx you love for just $2.99 a month.</p>
         </div>
       </div>
     </div>

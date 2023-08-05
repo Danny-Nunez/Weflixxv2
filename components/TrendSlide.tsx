@@ -34,6 +34,20 @@ function TrendSlide({ title }: { title: string }) {
 
   useEffect(() => {
     const fetchMovies = async () => {
+      const cacheKey = 'cachedTrendingMovies';
+      const cachedData = localStorage.getItem(cacheKey);
+      const currentTime = new Date().getTime();
+      const cacheExpiry = 24 * 60 * 60 * 1000; // 24 hours
+
+      if (cachedData) {
+        const parsedCache = JSON.parse(cachedData);
+        if (currentTime - parsedCache.timestamp < cacheExpiry) {
+          setMovies(parsedCache.data);
+          setIsLoading(false);
+          return; // Return early if data was found in cache
+        }
+      }
+
       const url = process.env.NEXT_PUBLIC_API_URL;
       if (!url) {
         throw new Error("API URL is not defined");
@@ -42,7 +56,6 @@ function TrendSlide({ title }: { title: string }) {
       try {
         const res = await axios.get<TrendingResponse>(url);
 
-        // Check if the API response has the expected structure
         if (
           res.data &&
           res.data.data &&
@@ -52,6 +65,13 @@ function TrendSlide({ title }: { title: string }) {
         ) {
           const trendingMovies = res.data.data.moviesSection.trending.trendingMovies;
           setMovies(trendingMovies);
+
+          // Cache the response data
+          const cacheData = {
+            data: trendingMovies,
+            timestamp: currentTime,
+          };
+          localStorage.setItem(cacheKey, JSON.stringify(cacheData));
         } else {
           console.error('Unexpected API response structure');
         }
@@ -63,6 +83,7 @@ function TrendSlide({ title }: { title: string }) {
     };
     fetchMovies();
   }, []);
+
 
   const handleClick = (direction: string) => {
     setIsMoved(true);

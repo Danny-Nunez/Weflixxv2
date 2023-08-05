@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useRecoilValue } from 'recoil'
 import { modalState, movieState } from '../atoms/modalAtom'
-import ComedyBanner from '../components/ComedyBanner'
+import FamilyBanner from '../components/FamilyBanner'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Modal from '../components/Modal'
@@ -41,7 +41,7 @@ const FamilyList = ({ netflixOriginals, products }: Props) => {
       
       <Header />
       <main className="backgroundMaster relative pl-4 lg:space-y-24 lg:pl-16">
-        <ComedyBanner />
+        <FamilyBanner />
         <section className="md:space-y-24">
           <FamilyGrid title="Family" />
         </section>

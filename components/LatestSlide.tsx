@@ -21,10 +21,25 @@ function LatestSlide({ title }: { title: string }) {
 
   useEffect(() => {
     const fetchMovies = async () => {
+      const cacheKey = 'cachedLatestMovies';
+      const cachedData = localStorage.getItem(cacheKey);
+      const currentTime = new Date().getTime();
+      const cacheExpiry = 24 * 60 * 60 * 1000; // 24 hours
+
+      if (cachedData) {
+        const parsedCache = JSON.parse(cachedData);
+        if (currentTime - parsedCache.timestamp < cacheExpiry) {
+          setMovies(parsedCache.data);
+          setIsLoading(false);
+          return; // Return early if data was found in cache
+        }
+      }
+
       const url = process.env.NEXT_PUBLIC_API_URL;
       if (!url) {
         throw new Error("API URL is not defined");
       }
+      
       try {
         const res = await axios.get(url);
 
@@ -37,6 +52,13 @@ function LatestSlide({ title }: { title: string }) {
         ) {
           const latestMovies = res.data.data.moviesSection.latestMovies;
           setMovies(latestMovies);
+
+          // Cache the response data
+          const cacheData = {
+            data: latestMovies,
+            timestamp: currentTime,
+          };
+          localStorage.setItem(cacheKey, JSON.stringify(cacheData));
         } else {
           console.error('Unexpected API response structure');
         }
@@ -48,7 +70,7 @@ function LatestSlide({ title }: { title: string }) {
     };
     fetchMovies();
   }, []);
-
+  
   const handleClick = (direction: string) => {
     setIsMoved(true);
 

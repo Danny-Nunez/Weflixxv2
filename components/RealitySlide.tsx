@@ -21,12 +21,24 @@ function RealitySlide({ title }: { title: string }) {
 
   useEffect(() => {
     const fetchMovies = async () => {
+      const cacheKey = 'cachedRealityShows';
+      const cachedData = localStorage.getItem(cacheKey);
+      const currentTime = new Date().getTime();
+      const cacheExpiry = 24 * 60 * 60 * 1000; // 24 hours
+
+      if (cachedData) {
+        const parsedCache = JSON.parse(cachedData);
+        if (currentTime - parsedCache.timestamp < cacheExpiry) {
+          setMovies(parsedCache.data);
+          setIsLoading(false);
+          return; // Return early if data was found in cache
+        }
+      }
+
       const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}genre/reality`;
-      // console.log('API URL:', apiUrl); // Check the API URL
 
       try {
         const response = await axios.get(apiUrl);
-        // console.log('Response:', response); // Check the response object
 
         if (
           response.data &&
@@ -36,6 +48,13 @@ function RealitySlide({ title }: { title: string }) {
         ) {
           const movieResults = response.data.data.results;
           setMovies(movieResults);
+
+          // Cache the response data
+          const cacheData = {
+            data: movieResults,
+            timestamp: currentTime,
+          };
+          localStorage.setItem(cacheKey, JSON.stringify(cacheData));
         } else {
           console.error('Unexpected API response structure');
         }

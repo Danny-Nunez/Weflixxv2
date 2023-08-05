@@ -29,6 +29,19 @@ function ComingSoonSlide({ title }: { title: string }) {
 
   useEffect(() => {
     const fetchMovies = async () => {
+      const cacheKey = 'cachedComingSoonMovies';
+      const cachedData = localStorage.getItem(cacheKey);
+      const currentTime = new Date().getTime();
+      const cacheExpiry = 24 * 60 * 60 * 1000; // 24 hours
+
+      if (cachedData) {
+        const parsedCache = JSON.parse(cachedData);
+        if (currentTime - parsedCache.timestamp < cacheExpiry) {
+          setMovies(parsedCache.data);
+          return; // Return early if data was found in cache
+        }
+      }
+
       const url = `${process.env.NEXT_PUBLIC_API_URL}top-imdb?limit=24`;
       if (!url) {
         throw new Error("API URL is not defined");
@@ -37,17 +50,24 @@ function ComingSoonSlide({ title }: { title: string }) {
         const res = await axios.get<ApiResponse>(url);
         if (res.data && res.data.data && res.data.data.results) {
           setMovies(res.data.data.results);
+
+          // Cache the response data
+          const cacheData = {
+            data: res.data.data.results,
+            timestamp: currentTime,
+          };
+          localStorage.setItem(cacheKey, JSON.stringify(cacheData));
         } else {
           console.error('Unexpected API response structure');
-  
         }
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
     };
+
     fetchMovies();
   }, []);
-
+  
   const handleClick = (direction: string) => {
     setIsMoved(true);
 
