@@ -34,6 +34,7 @@ function Thumbnail({ movie }: Props) {
         setShowModal(true);
       }}
     >
+      <span className="absolute z-10 bottom-0 bg-black rounded-sm bg-opacity-60 text-sm text-white p-1 w-11/12 overflow-ellipsis overflow-hidden whitespace-nowrap">{movie.title}</span>
       {imageUrl && (
         <LazyLoadImage
           src={imageUrl}
@@ -42,7 +43,7 @@ function Thumbnail({ movie }: Props) {
           style={{ width: '100%', height: '100%' }}
         />
       )}
-      <span className="absolute bottom-0 bg-black rounded-sm bg-opacity-60 text-sm text-white p-1 w-11/12 overflow-ellipsis overflow-hidden whitespace-nowrap">{movie.title}</span>
+      
     </div>
   );
 }

@@ -67,7 +67,7 @@ function ComingSoonSlide({ title }: { title: string }) {
 
     fetchMovies();
   }, []);
-  
+
   const handleClick = (direction: string) => {
     setIsMoved(true);
 
