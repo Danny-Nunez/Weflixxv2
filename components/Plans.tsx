@@ -99,6 +99,13 @@ function Plans({ products }: Props) {
             )}
           </button>
         </div>
+        <div className="text-xs text-gray-400 pt-5 text-center">Creating an account is completely free. For testing purposes, we've set Stripe in test mode. 
+        <p>You can use the following details:</p>
+
+        <p>Card number: 4242 4242 4242 4242</p>
+        <p>Expiry date: 10/26</p>
+        <p>CVV: 422</p>
+        </div>
       </main>
     </div>
   )

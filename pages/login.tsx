@@ -157,9 +157,16 @@ function Login() {
                 >
                   Sign up now
                 </button>
+                <p className="pt-5 text-sm">User:Demo@gmail.com Password:12345678</p>
               </>
             )}
-            <p className="pt-5 text-sm">User:Demo@gmail.com Password:12345678</p>
+            <div className="text-xs text-stone-600 pt-5 text-center">Creating an account is completely free. For testing purposes, we've set Stripe in test mode. 
+        <p>You can use the following details:</p>
+
+        <p>Card number: 4242 4242 4242 4242</p>
+        <p>Expiry date: 10/26</p>
+        <p>CVV: 422</p>
+        </div>
           </div>
         </form>
       </div>
