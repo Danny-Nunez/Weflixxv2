@@ -11,7 +11,7 @@ interface Movie {
   image: string;
 }
 
-function FamilyGrid({ title }: { title: string }) {
+function RealityGrid({ title }: { title: string }) {
   const rowRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<HTMLDivElement>(null);
   const [isMoved, setIsMoved] = useState(false);
@@ -22,7 +22,7 @@ function FamilyGrid({ title }: { title: string }) {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}genre/family?page=${currentPage}`;
+      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}genre/reality?page=${currentPage}`;
 
       try {
         const response = await axios.get(apiUrl);
@@ -142,7 +142,6 @@ function FamilyGrid({ title }: { title: string }) {
   );
 }
 
-export default FamilyGrid;
-
+export default RealityGrid;
 
 

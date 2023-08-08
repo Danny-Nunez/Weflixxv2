@@ -93,67 +93,117 @@ function Header() {
           </div>
         {/* Dropdown content */}
         {showDropdown && (
-          <ul className="absolute top-8 left-[-20px] bg-black shadow-md pl-4 pr-8 rounded-md">
+          <ul className="absolute top-10 w-80 left-[-10px] bg-black shadow-md pl-4 pb-2 pt-2 rounded-md flex flex-wrap">
             {/* Links inside the dropdown */}
-            <li className="mb-3 mt-3 hover:underline cursor-pointer flex inline ">
+            <li className="mb-3 mt-3 hover:underline cursor-pointer flex inline w-1/2">
             <img src="/action.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/> 
               <Link href="/action">Action</Link>
             </li>
-            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
             <img src="/adventure.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/> 
               <Link href="/adventure">Adventure</Link>
             </li>
-            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
             <img src="/animation.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/> 
               <Link href="/animation">Animation</Link>
             </li>
-            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
             <img src="/biography.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
               <Link href="/biography">Biography</Link>
             </li>
-            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
             <img src="/comedy.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
               <Link href="/comedy">Comedy</Link>
             </li>
-            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
             <img src="/crime.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
               <Link href="/crime">Crime</Link>
             </li>
-            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
             <img src="/documentary.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
               <Link href="/documentary">Documentary</Link>
             </li>
-            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
             <img src="/drama.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
               <Link href="/drama">Drama</Link>
             </li>
-            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
             <img src="/family.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
               <Link href="/family">Family</Link>
             </li>
-            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
             <img src="/fantasy.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
               <Link href="/fantasy">Fantasy</Link>
             </li>
-            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
             <img src="/history.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
               <Link href="/history">History</Link>
             </li>
-            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline">
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
             <img src="/horror.png" width="16px" height="16px"
               className="cursor-pointer object-contain ml-1 mr-2"/>
               <Link href="/horror">Horror</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
+            <img src="/kids.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/kids">Kids</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
+            <img src="/music.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/music">Music</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
+            <img src="/mystery.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/mystery">Mystery</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
+            <img src="/news.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/newsgenre">News</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
+            <img src="/reality.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/reality">Reality</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
+            <img src="/romance.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/romance">Romance</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
+            <img src="/science-fiction.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/science-fiction">Science Fiction</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
+            <img src="/soap.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/soap">Soap</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
+            <img src="/talk.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/talk">Talk</Link>
+            </li>
+            <li className="mb-3 mt-3  hover:underline cursor-pointer flex inline w-1/2">
+            <img src="/thriller.png" width="16px" height="16px"
+              className="cursor-pointer object-contain ml-1 mr-2"/>
+              <Link href="/thriller">Thriller</Link>
             </li>
           </ul>
         )}

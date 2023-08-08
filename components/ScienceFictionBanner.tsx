@@ -20,7 +20,7 @@ interface Movie {
   };
 }
 
-function HorrorBanner() {
+function ScienceFictionBanner() {
   const [movie, setMovie] = useState<Movie | null>(null)
   const [showModal, setShowModal] = useRecoilState(modalState)
   const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
@@ -28,9 +28,9 @@ function HorrorBanner() {
   const [posterUrl, setPosterUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchBiographyMovie = async () => {
+    const fetchFantasyMovie = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}genre/horror?page=1`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}genre/science-fiction?page=1`);
         const data = await response.json();
   
         if (data && data.data && data.data.results && data.data.results.length > 0) {
@@ -54,7 +54,7 @@ function HorrorBanner() {
       }
     };
   
-    fetchBiographyMovie();
+    fetchFantasyMovie();
   }, []);
 
   
@@ -115,4 +115,4 @@ function HorrorBanner() {
   )
 }
 
-export default HorrorBanner
+export default ScienceFictionBanner

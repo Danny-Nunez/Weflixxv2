@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { parseString } from 'xml2js';
 import Header from '../components/Header'
-import NewsBanner from '../components/NewsBanner'
 import Footer from '../components/Footer'
 
 interface Movie {

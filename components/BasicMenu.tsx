@@ -153,6 +153,76 @@ export default function BasicMenu() {
                 <Link href="/horror">Horror</Link>
               </div>
             </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/kids.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/kids">Kids</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/music.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/music">Music</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/mystery.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/mystery">Mystery</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/news.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/news">News</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/reality.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/reality">Reality</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/romance.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/romance">Romance</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/science-fiction.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/science-fiction">Science Fiction</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/soap.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/soap">Soap</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/talk.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/talk">Talk</Link>
+              </div>
+            </MenuItem>
+            <MenuItem>
+              <div className=" hover:underline cursor-pointer flex inline text-xs font-light text-gray-300">
+                <img src="/thriller.png" width="16px" height="16px"
+                    className="cursor-pointer object-contain ml-1 mr-2"/>
+                <Link href="/thriller">Thriller</Link>
+              </div>
+            </MenuItem>
           </div>
         </Collapse>
         <MenuItem onClick={handleClose}><Link href="/news">News</Link></MenuItem>
