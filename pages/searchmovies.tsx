@@ -107,9 +107,15 @@ const SearchMovies = () => {
   };
 
   const handleModalOpen = (movie: Movie) => {
-    setCurrentMovie(movie);
+    const mappedMovie = {
+      ...movie,
+      type: movie.type === 'TV Series' ? 'tv-show' : movie.type,
+    };
+    
+    setCurrentMovie(mappedMovie);
     setShowModal(true);
   };
+  
 
   const handleNextPage = () => {
     setPagination((prevPagination) => ({
