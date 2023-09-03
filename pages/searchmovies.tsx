@@ -41,10 +41,20 @@ const SearchMovies = () => {
   }, [router.query]);
 
   useEffect(() => {
+    // Reset movies and pagination when query changes
+    setMovies([]);
+    setPagination({ currentPage: 1, hasNextPage: false });
+
     if (query) {
       searchMovies();
     }
-  }, [query, pagination.currentPage]);
+  }, [query]);
+
+  useEffect(() => {
+    if (query && pagination.currentPage > 1) {
+      searchMovies();
+    }
+  }, [pagination.currentPage]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -79,7 +89,14 @@ const SearchMovies = () => {
         `${process.env.NEXT_PUBLIC_MOVIE_URL}${query}?page=${pagination.currentPage}`
       );
       const data = await response.json();
-      setMovies((prevMovies) => [...prevMovies, ...data?.results ?? []]);
+      setMovies((prevMovies) => {
+        // If we're on the first page, replace the movies, else append to existing
+        if (pagination.currentPage === 1) {
+          return [...data?.results ?? []];
+        } else {
+          return [...prevMovies, ...data?.results ?? []];
+        }
+      });
       setPagination({
         currentPage: data?.currentPage ?? 1,
         hasNextPage: data?.hasNextPage ?? false,
@@ -135,15 +152,3 @@ const SearchMovies = () => {
 };
 
 export default SearchMovies;
-
-
-  
-
-
-
-
-
-
-  
-  
-  
