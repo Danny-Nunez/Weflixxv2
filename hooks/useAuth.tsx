@@ -7,6 +7,7 @@ import {
   updateProfile,
 } from 'firebase/auth';
 
+import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { auth } from '../firebase';
@@ -122,12 +123,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     } catch (error: unknown) {
       if (error instanceof Error) {
         const errorMessage = error.message;
-        console.error(errorMessage);
-        setError(errorMessage);
-        alert(errorMessage);
+        
+        // console.error(errorMessage);
+        // setError(errorMessage);
+        // alert(errorMessage);
+        toast.error('Error wrong username or password');
+       
+        
       } else {
         console.error('Unknown error occurred');
         alert('Unknown error occurred');
+        toast.error('Unknown error occurred');
       }
     } finally {
       setLoading(false);

@@ -81,6 +81,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
       const url = await fetchMovieUrl(movieId, episodeId);
       setMovieUrl(url);
       setIsLoading(false);
+      console.log(movieId);
+      console.log(episodeId);
     };
 
     fetchUrl();

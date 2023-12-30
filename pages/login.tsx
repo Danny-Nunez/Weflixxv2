@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import useAuth from '../hooks/useAuth';
+import toast, { Toaster } from 'react-hot-toast';
 
 interface Inputs {
   email: string;
@@ -61,6 +62,7 @@ function Login() {
           className="relative mt-24 space-y-8 rounded bg-black/75 py-20 px-6 md:mt-0 md:max-w-md md:px-14"
         >
           <h1 className="text-4xl font-semibold">{isSigningUp ? 'Sign Up' : 'Sign In'}</h1>
+          <Toaster />
           <div className="space-y-4">
             {isSigningUp && (
               <label className="inline-block w-full">
@@ -168,27 +170,11 @@ function Login() {
         </div>
           </div>
         </form>
+        <div className="h-100 pt-20 text-stone-300 text-sm">
+       <span>WeFlixx is a Tv-Show & Movie streaming site with zero ads.</span>
       </div>
-      <div className="bg-black h-100 grid grid-cols-1 pt-8 md:grid-cols-2">
-        <div className="flex justify-center items-center">
-          <div className="relative w-540 h-405">
-            <video className="w-6/12 h-full object-cover pb-40 pt-5 pl-4 ml-20 md:w-8/12" autoPlay loop muted>
-              <source src="/video-devices.m4v" type="video/mp4" />
-            </video>
-            <img
-              className="absolute top-0 left-0 w-full h-full object-cover"
-              src="/device-pile.png"
-              alt="Overlay"
-            />
-          </div>
-        </div>
-
-        <div className=" m-auto pt-8 p-5 md:ml-0 md:pl-0">
-          <h1 className="font-black text-4xl pb-8 md:text-5xl">Watch everywhere</h1>
-          <p>Stream unlimited movies on your phone, tablet, laptop, and TV.</p>
-          <p className="font-bold ">The WeFlixx you love for just $2.99 a month.</p>
-        </div>
       </div>
+      
     </div>
   );
 }
