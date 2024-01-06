@@ -93,27 +93,17 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
 
   return (
     <div className="w-full">
-    {isLoading ? (
-      <Weflixxloader />
-    ) : (
-      movieUrl && (
-        isAppleDevice ? (
-          <Player src={`${process.env.NEXT_PUBLIC_APP_CORS_PROXY}?url=${movieUrl}`} poster={coverUrl} subtitles={subtitles}>
-            {(ref, props) => <video ref={ref} {...props} autoPlay/>}
-          </Player>
-          
-        ) : (
-          <Player src={`${process.env.NEXT_PUBLIC_APP_CORS_PROXY}?url=${movieUrl}`} poster={coverUrl} subtitles={subtitles}>
-            {(ref, props) => <HlsPlayer
-            playerRef={ref} autoPlay={true} {...props}
-            
-             />}
-          </Player>
-        )
-      )
-    )}
-  </div>
-  
+  {isLoading ? (
+    <Weflixxloader />
+  ) : movieUrl ? (
+    <Player src={`${process.env.NEXT_PUBLIC_APP_CORS_PROXY}?url=${movieUrl}`} poster={coverUrl} subtitles={subtitles}>
+      {(ref, props) => <HlsPlayer
+        playerRef={ref} autoPlay={true} {...props}
+      />}
+    </Player>
+  ) : null}
+</div>
+
   );
 };
 
