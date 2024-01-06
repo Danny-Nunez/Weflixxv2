@@ -29,6 +29,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
   const [subtitles, setSubtitles] = useState<Subtitle[]>([]);
   const [sources, setSources] = useState<Source[]>([]);
   const playerRef = useRef(null);
+  
 
   const fetchMovieUrl = async (id: string, episodeId: string): Promise<string> => {
     try {
@@ -38,11 +39,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
       const response = await fetch(apiUrl);
       const data = await response.json();
       // console.log('API Response:', data);
+      console.log(movieUrl);
   
       // Check if the data object and its properties exist before accessing them
       if (data && data.sources) {
         const sources = data.sources;
         const subtitles = data.subtitles;
+        
   
         const firstSource = sources[0];
         const quality1080Url = firstSource?.url || null;
@@ -94,23 +97,27 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
 
   return (
     <div className="w-full">
-      {isLoading ? (
-        <Weflixxloader />
-      ) : (
-        movieUrl && (
-          isAppleDevice ? (
-            <Player src={movieUrl} poster={coverUrl} subtitles={subtitles}>
-              {(ref, props) => <video ref={ref} {...props} autoPlay/>}
-            </Player>
+    {isLoading ? (
+      <Weflixxloader />
+    ) : (
+      movieUrl && (
+        isAppleDevice ? (
+          <Player src={`${process.env.NEXT_PUBLIC_APP_CORS_PROXY}?url=${movieUrl}`} poster={coverUrl} subtitles={subtitles}>
+            {(ref, props) => <video ref={ref} {...props} autoPlay/>}
+          </Player>
+          
+        ) : (
+          <Player src={`${process.env.NEXT_PUBLIC_APP_CORS_PROXY}?url=${movieUrl}`} poster={coverUrl} subtitles={subtitles}>
+            {(ref, props) => <HlsPlayer
+            playerRef={ref} autoPlay={true} {...props}
             
-          ) : (
-            <Player src={sources} poster={coverUrl} subtitles={subtitles}>
-              {(ref, props) => <HlsPlayer playerRef={ref} autoPlay={true} {...props} />}
-            </Player>
-          )
+             />}
+          </Player>
         )
-      )}
-    </div>
+      )
+    )}
+  </div>
+  
   );
 };
 
