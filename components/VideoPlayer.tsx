@@ -98,7 +98,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
     ) : (
       movieUrl && (
         isAppleDevice ? (
-          <Player src={`https://worker-lively-resonance-3278.dnunez22.workers.dev/?url=${movieUrl}`} poster={coverUrl} subtitles={subtitles}>
+          <Player src={movieUrl} poster={coverUrl} subtitles={subtitles}>
             {(ref, props) => <video ref={ref} {...props} autoPlay/>}
           </Player>
           
