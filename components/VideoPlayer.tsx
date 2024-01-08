@@ -34,8 +34,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
   const fetchMovieUrl = async (id: string, episodeId: string): Promise<string> => {
     try {
       const apiUrl = `${process.env.NEXT_PUBLIC_MOVIE_URL}watch?episodeId=${episodeId}&mediaId=${id}`;
+      // console.log(apiUrl);
+      // console.log('Fetching movie URL with mediaId:', id, 'and episodeId:', episodeId);
       const response = await fetch(apiUrl);
       const data = await response.json();
+  
+      
   
       // Check if the data object and its properties exist before accessing them
       if (data && data.sources) {
@@ -80,8 +84,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
       const url = await fetchMovieUrl(movieId, episodeId);
       setMovieUrl(url);
       setIsLoading(false);
-      // console.log(movieId);
-      // console.log(episodeId);
+      console.log(movieId);
+      console.log(episodeId);
     };
 
     fetchUrl();
@@ -98,12 +102,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ movieId, title, episodeId, ep
     ) : (
       movieUrl && (
         isAppleDevice ? (
-          <Player src={movieUrl} poster={coverUrl} subtitles={subtitles}>
+          <Player src={`${process.env.NEXT_PUBLIC_APP_CORS_PROXY}?url=${movieUrl}&all=yes`} poster={coverUrl} subtitles={subtitles}>
             {(ref, props) => <video ref={ref} {...props} autoPlay/>}
           </Player>
           
         ) : (
-          <Player src={`${process.env.NEXT_PUBLIC_APP_CORS_PROXY}?url=${movieUrl}`} poster={coverUrl} subtitles={subtitles}>
+          <Player src={`${process.env.NEXT_PUBLIC_APP_CORS_PROXY}?url=${movieUrl}&all=yes`} poster={coverUrl} subtitles={subtitles}>
             {(ref, props) => <HlsPlayer
             playerRef={ref} autoPlay={true} {...props}
             

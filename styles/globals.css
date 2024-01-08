@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* html, body, heading */
 @layer base {
   body {
     @apply bg-[#000000] text-white !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-red-600;
